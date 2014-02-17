@@ -1,0 +1,68 @@
+﻿<div class="innerPage" ng-controller="defineInterestController">
+    <h1>הגדרת תחום התעניינות כספק</h1>
+    <fieldset>
+        <legend>מיקום אסיפה</legend>
+        <label>איזור</label>
+
+        <div id="areas" style="border-width:1px;border-style:solid;border-color:black;overflow-y:scroll;overflow-x:hidden;height:100px;width:150px">
+            <div ng-repeat="a in areas">
+                
+                <input type ="checkbox" />
+                <span>{{a.value}}</span>
+            </div>
+        </div>
+    </fieldset>
+    
+     <fieldset>
+                    <legend>פרטי המשלוח</legend>
+                    <input type="button" class="btn" value="הוסף משלוח" ng-click="addPackage()"/>
+                    <div ng-repeat="p in packageDefinitions">
+                        <label>סוג המשלוח</label>
+                        
+                        <select ng-change="p.PackageTypeChange()" ng-options ="pac.Name for pac in p.Packages" ng-model="p.PackageType">
+                        </select>
+                        <label>פרטי משלוח</label>
+                        <select ng-options="pac.Name for pac in p.SubPackages" ng-model="p.SubPackageType"></select>
+                        <label>משקל</label>
+                        <input type="number" ng-model="p.SubPackageType.Weight" class="number"/>
+                        <span>ק''ג</span>
+                        <label>אורך</label>
+                        <input type="number" ng-model="p.SubPackageType.Length" class="number"/>
+                        <label>רוחב</label>
+                        <input type="number" ng-model="p.SubPackageType.Width" class="number"/>
+                        <label>גובה</label>
+                        <input type="number" ng-model="p.SubPackageType.Height" class="number"/> 
+                        <div style="display:none" id="{{p.PlatformDivId}}">
+                                 <label>נדרש קירור</label> <input type="checkbox" ng-model="p.SubPackageType.FreezeNeeded"/>
+                                 <label>שברירי</label> <input type="checkbox" ng-model="p.SubPackageType.Fragile"/>
+                                 <label>נדרש בידוד</label> <input type="checkbox" ng-model="p.SubPackageType.IsolationNeeded"/>
+                                 <label>נדרש ביטוח</label> <input type="checkbox"ng-model="p.SubPackageType.InsuranseNeeded" />
+                        </div>
+                     </div>  
+                </fieldset>
+    <fieldset>
+        <legend>יומי שבוע וזמן</legend>
+        
+        <div ng-controller="interestDayAndTimeFrameController">
+            <input type="button" ng-click="addDay()" value="הוסף יום"/>
+            <div ng-repeat="interest in daysOfInterest">
+                <label>יום</label>
+                <select>
+                    <option value="0">יום ראשון</option>
+                    <option value="0">יום שני</option>
+                    <option value="0">יום שלישי</option>
+                    <option value="0">יום רביעי</option>
+                    <option value="0">יום חמישי</option>
+                    <option value="0">יום שישי</option>
+                    <option value="0">יום שבת</option>
+
+                </select>       
+                <label>שעת התחלה</label>
+                <input type="time" value="00:00"/>
+                <label>שעת סיום</label>
+                <input type="time" value="23:59"/>
+            </div>
+        </div>
+    </fieldset>
+</div>
+

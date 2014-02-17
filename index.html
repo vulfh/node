@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+   
+    <title></title>
+     <link rel="stylesheet" href="styles/bootstrap/css/bootstrap.min.css" />
+    <style type="text/css">
+        body {
+            direction: rtl;
+        }
+
+        li
+        {
+            float: right;
+        }
+      
+        .menuActive
+        {
+          
+        }
+        div.innerPage
+        {
+            margin-right:10px;
+        }
+        label
+        {
+            margin-right:10px;
+        }
+        input[type="text"].number
+        {
+            width:30px;
+        }
+        input[type="number"].number
+        {
+            width:50px;
+        }
+    </style>
+
+</head>
+<body>
+    <div ng-app="mockup" ng-controller="mainController">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="collapse navbar-collapse" style="direction:rtl;float:right">
+                <ul class="nav navbar-nav">
+                    <li><a id="myAccount" href="#" data-toggle="tab" ng-click="switch($event)">חשבון שלי</a></li>
+                    <li><a id="myShipping" href="#" data-toggle="tab" ng-click="switch($event)">משלוחים שלי</a></li>
+                    <li class="active">
+                        <a id="rfs" href="#askForShipping" data-toggle="tab" ng-click="switch($event)">
+                            לבקש
+                            הצעת מחיר למשלוח
+                        </a>
+                    </li>
+                    <li><a id="areaOfInterest" href="#interest" data-toggle="tab" ng-click="switch($event)">להגדיר תחומי עניין כספק  </a></li>
+                    <li><a id="givePrice" href="#givePrice" data-toggle="tab" ng-click="switch($event)">לתת הצעת מחיר כשליח</a></li>
+                    <li><a id="subscribe" href="#subscribeAsSender" data-toggle="tab" ng-click="switch($event)">להרשם כשליח</a></li>
+                </ul>
+            </div>
+            </nav>
+            
+            <div style="clear:both"></div>
+            <div >
+                <div style="width:100%" >
+                    <ng-include src="template"></ng-include>
+                </div>
+            </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="scripts/packages.js" type="text/javascript" ></script>
+    <script type="text/javascript">
+        TimeFrameOfInterest = function () {
+           // this.self = this;
+            this.day = '';
+            this.startTime = ''
+            this.endTime = '';
+        }
+        
+        RequestForShipping = function (rName,rId) {
+            this.name = rName;
+            this.id = rId;
+            this.packageCounter = 0;
+            this.packageDefinitions = [new PackageDefinition(this.id + "afs",this.packageCounter++)];
+            this.packageDefinitions[0].SetIndex(0);
+            this.pickUpDate = (new Date()).toDateString();
+            this.addPackage = function () {
+                var pd = new PackageDefinition(this.id+"afs",this.packageCounter++);
+                pd.SetIndex(this.packageDefinitions.length);
+                this.packageDefinitions.push(pd);
+            }
+        }
+
+        var app = angular.module('mockup', []);
+        angular.module("mockup").controller('mainController', ['$scope', function ($scope) {
+            $scope.template = "./pages/AskForSending.html?" + Math.random();
+            $scope.switch = function ($event) {
+                $("li").removeClass("active");
+                var li = $("#" + $event.currentTarget.id).parent();
+                li.addClass("active");
+                switch ($event.currentTarget.id) {
+                    case "rfs":
+                        $scope.template = "./pages/AskForSending.html?"+Math.random();
+                        break;
+                    case "areaOfInterest":
+                        $scope.template = "./pages/DefineInterest.html?"+Math.random();
+                        break;
+                    case "givePrice":
+                        $scope.template = "./pages/GivePrice.html?"+Math.random();
+                        break;
+                    default:
+                        $scope.template = "";
+                        break;
+                }
+            }
+        }]);
+        angular.module("mockup").controller("interestDayAndTimeFrameController", ['$scope', function ($scope) {
+            $scope.daysOfInterest = [];
+            $scope.daysOfInterest.push(new TimeFrameOfInterest());
+            $scope.addDay = function () {
+                $scope.daysOfInterest.push(new TimeFrameOfInterest());
+            }
+        }]);
+        ///AskForSending Controller
+        angular.module("mockup").controller("askForSendingController", ['$scope', function ($scope) {
+            $scope.requests = [new RequestForShipping("בקשה 1", "request0")];
+            $scope.tabs = [$scope.requests[0]];
+            
+            $scope.hideAllTabs = function () {
+                for (var i = 0; i < $scope.requests.length; i++) {
+                    $("#" + $scope.requests[i].id).css("display", "none");
+                }
+            }
+            $scope.showTab = function (reqId) {
+                var req = $scope.getRequestById(reqId);
+                        $("#" +req.id).css("display", "block");
+            }
+            $scope.getRequestById = function (reqId) {
+                for (var i = 0; i < $scope.requests.length; i++) {
+                    if ($scope.requests[i].id === reqId) {
+                        return $scope.requests[i];
+                    }
+                }
+            }
+            $scope.removePackage = function (reqId, index) {
+               
+                var req = $scope.getRequestById(reqId);
+                req.packageDefinitions.splice(index, 1);
+            }
+            $scope.sendRequest = function (id) {
+                $("#" + id + " :input").prop("disabled", true);
+            /*    $.each(inp, function ( idx,e) {
+                    debugger;
+                    e.prop("disabled", true);
+                });*/
+            }
+            $scope.addRequest = function () {
+                var req = new RequestForShipping("בקשה " + ($scope.requests.length + 1), "request" + $scope.requests.length);
+                $scope.requests.push(req);
+                $scope.tabs.unshift(req);
+                this.hideAllTabs();
+                this.showTab(req.id);
+                $scope.switchTab("tab" + req.id, req.id);
+            }
+            $scope.switchTab = function (liId,tabId) {
+                $("ul[id='requestsMenu'] > li").removeClass("active");
+                var li = $("#" +liId);
+                li.addClass("active");
+                $scope.hideAllTabs();
+                $scope.showTab(tabId);
+            }
+            $scope.switchTab("tab" + $scope.requests[0].id, $scope.requests[0].id);
+
+        }]);
+
+        angular.module("mockup").controller("defineInterestController", ['$scope', function ($scope) {
+            $scope.packageCounter = 0;
+            $scope.packageDefinitions = [new PackageDefinition("di",$scope.packageCounter++)];
+            $scope.packageDefinitions[0].SetIndex(0);
+            $scope.addPackage = function () {
+                var pd = new PackageDefinition("di",$scope.packageCounter++);
+                pd.SetIndex($scope.packageDefinitions.length);
+                $scope.packageDefinitions.push(pd);
+            }
+            $scope.areas = [{ key: 1, value: 'חיפה והסביבה' },
+                            { key: 2, value: 'ירושלים' },
+                            { key: 3, value: 'תל אביב הגדולה' },
+                            { key: 4, value: 'באר שבע והסביבה' },
+                            { key: 5, value: 'אילת' },
+                            { key: 6, value: 'נהריה' },
+                            { key: 7, value: 'קרית גת' }];
+        }]);
+
+
+        angular.module("mockup").directive('dateFix', function () {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, element, attr, ngModel) {
+                    element.on('change', function () {
+                        scope.$apply(function () {
+                            ngModel.$setViewValue(element.val());
+                        });
+                    });
+                }
+            };
+        });
+    </script>
+</body>
+</html>
+

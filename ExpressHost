@@ -1,0 +1,5 @@
+var express =require('express');
+ExpressHost = function(port){
+	this._self = this;
+	this.expressServer=
+}
