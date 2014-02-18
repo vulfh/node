@@ -1,7 +1,8 @@
 var express =require('express');
 var path = require('path');
-var controller = require('./controller.js')
+var controller = require('./controller.js');
 var Request = require('./request.js');
+var Response = require('./response.js');
 var url = require('url');
 
 function ExpressHandlerDelegate(host,ctrl,handler){
@@ -43,24 +44,39 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	    }
 	}
 ////////////////////////////////////////////////////////////////////////
-	ExpressHost.prototype.controllerHandler = function (controller,req, res) {
+	ExpressHost.prototype.controllerHandler = function (controller, req, res) {
 	    var urlParts = url.parse(req.url, true, true);
 	    var query = urlParts.query;
 	    var pathName = urlParts.pathname.toUpperCase();
 	    console.log(query);
 	    console.log(pathName);
-	    var req = new Request(query);
+	    var request = new Request(query,req.body);
+	    var response = new Response(res);
 	    console.log(req);
-	    debugger;   
-        controller.handler(req, null);
+	    debugger;
+	    controller.handler(request, response);
 	}
-ExpressHost.prototype.startListen = function () {
-    console.log('start listen ...');
-    for (var i = 0; i < this.controllers.length; i++) {
-        var ctrl = this.controllers[i];
-        console.log('listening on %s', ctrl.path);
-        this.expressServer.get(ctrl.path, new ExpressHandlerDelegate(this,ctrl,this.controllerHandler));
+////////////////////////////////////////////////////////////////////////
+	ExpressHost.prototype.startListen = function () {
+	    console.log('start listen ...');
+	    for (var i = 0; i < this.controllers.length; i++) {
+	        var ctrl = this.controllers[i];
+	        console.log('listening on %s', ctrl.path);
+	        this.attachController(ctrl);
+	    }
+	}
+////////////////////////////////////////////////////////////////////////////////////////
+    ExpressHost.prototype.attachController = function(ctrl){
+        var delegate = new ExpressHandlerDelegate(this, ctrl, this.controllerHandler);
+         switch (ctrl.protocol) {
+	            case 'GET':
+                 this.expressServer.get(ctrl.path, delegate);
+	                break;
+	            case 'POST':
+                 this.expressServer.post(ctrl.path, delegate);
+	                break;
+	        }
+
     }
-}
 //////////////////////////////////////////////////////////////////
 module.exports = ExpressHost;

@@ -26,6 +26,7 @@ app.addFolder('../styles/bootstrap/css');
 app.addFolder('../styles/bootstrap/fonts');
 app.addFolder('../styles/bootstrap/js');
 
-app.setControllers([new Controller('/test', function (req, res) {console.log('q parameter is %s',req.QueryParams['q']); }, "GET")], function (err) { });
+app.setControllers([new Controller('/test', function (req, res) {console.log('q parameter is %s',req.QueryParams['q']);res.send('ok'); }, "GET"),
+                    new Controller('/testPost',function(req,res){console.log('myName parameter is %s',req.PostParams.myName);res.send('postOk')},'POST')], function (err) { });
 app.start();
 
