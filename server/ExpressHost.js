@@ -37,7 +37,6 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	}
 /////////////////////////////////////////////////////////////////////////////
 	ExpressHost.prototype.setControllers = function (controllers, errHandler) {
-	    debugger;
 	    if (controllers !== null && controllers !== undefined) {
 	        this.controllers = controllers;
 
@@ -45,15 +44,15 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	}
 ////////////////////////////////////////////////////////////////////////
 	ExpressHost.prototype.controllerHandler = function (controller, req, res) {
+	    debugger;
 	    var urlParts = url.parse(req.url, true, true);
 	    var query = urlParts.query;
 	    var pathName = urlParts.pathname.toUpperCase();
 	    console.log(query);
 	    console.log(pathName);
-	    var request = new Request(query,req.body);
+	    var request = new Request(query, req.body);
 	    var response = new Response(res);
 	    console.log(req);
-	    debugger;
 	    controller.handler(request, response);
 	}
 ////////////////////////////////////////////////////////////////////////
@@ -61,7 +60,7 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	    console.log('start listen ...');
 	    for (var i = 0; i < this.controllers.length; i++) {
 	        var ctrl = this.controllers[i];
-	        console.log('listening on %s', ctrl.path);
+	        console.log('listening %s on %s',ctrl.protocol, ctrl.path);
 	        this.attachController(ctrl);
 	    }
 	}

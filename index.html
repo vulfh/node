@@ -3,8 +3,9 @@
 <head>
 
    
-    <title></title>
+    <title>Shipping</title>
      <link rel="stylesheet" href="styles/bootstrap/css/bootstrap.min.css" />
+     <link rel="stylesheet" href="styles/styles.css" />
     <style type="text/css">
         body {
             direction: rtl;
@@ -40,23 +41,7 @@
 </head>
 <body>
     <div ng-app="mockup" ng-controller="mainController">
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="collapse navbar-collapse" style="direction:rtl;float:right">
-                <ul class="nav navbar-nav">
-                    <li><a id="myAccount" href="#" data-toggle="tab" ng-click="switch($event)">חשבון שלי</a></li>
-                    <li><a id="myShipping" href="#" data-toggle="tab" ng-click="switch($event)">משלוחים שלי</a></li>
-                    <li class="active">
-                        <a id="rfs" href="#askForShipping" data-toggle="tab" ng-click="switch($event)">
-                            לבקש
-                            הצעת מחיר למשלוח
-                        </a>
-                    </li>
-                    <li><a id="areaOfInterest" href="#interest" data-toggle="tab" ng-click="switch($event)">להגדיר תחומי עניין כספק  </a></li>
-                    <li><a id="givePrice" href="#givePrice" data-toggle="tab" ng-click="switch($event)">לתת הצעת מחיר כשליח</a></li>
-                    <li><a id="subscribe" href="#subscribeAsSender" data-toggle="tab" ng-click="switch($event)">להרשם כשליח</a></li>
-                </ul>
-            </div>
-            </nav>
+            <ng-include src="topMenu"></ng-include>
             
             <div style="clear:both"></div>
             <div >
@@ -65,10 +50,7 @@
                 </div>
             </div>
     </div>
-    <form method="post" action="/testPost">
-        <input type="text" name="myName"/>
-        <input type="submit" value="Ok"/>
-    </form>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="scripts/packages.js" type="text/javascript" ></script>
@@ -95,8 +77,42 @@
         }
 
         var app = angular.module('mockup', []);
-        angular.module("mockup").controller('mainController', ['$scope', function ($scope) {
-            $scope.template = "./pages/AskForSending.html?" + Math.random();
+        //////SERVICES/////////////////////////////////////////////////
+        sharedSvc = function(){
+           this.onLogin = function(){};   
+        }
+        app.factory('shared',[function(){
+            return new sharedSvc();
+        }]);
+        //////CONTROLLERS//////////////////////////////////////////////
+        
+        app.controller('topMenuController',['$scope','$http','shared',function($scope,$http,shared){
+            $scope.login = function(){
+                var userName = $('#txtUserName').val();
+                var password = $('#txtPassword').val();
+                $http.post('/auth',{userName:userName,password:password}).
+                success(function(data,status,headers,config){
+                    if(data.success){
+                        shared.onLogin();
+                    }
+                    else{
+                        alert(data.description);
+                    }
+                }).
+                error(function(data,status,headers,config){
+                    alert('error');
+                });
+            };
+        }]);
+
+        angular.module("mockup").controller('mainController', ['$scope','shared', function ($scope,shared) {
+            $scope.topMenu = "./controls/login.html?"+Math.random();
+           
+           shared.onLogin = function(){
+               $scope.topMenu = './controls/topmenu.html?'+Math.random();
+               $scope.template = "./pages/AskForSending.html?" + Math.random();
+
+           }
             $scope.switch = function ($event) {
                 $("li").removeClass("active");
                 var li = $("#" + $event.currentTarget.id).parent();
