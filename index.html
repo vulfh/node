@@ -56,21 +56,21 @@
     <script src="scripts/packages.js" type="text/javascript" ></script>
     <script type="text/javascript">
         TimeFrameOfInterest = function () {
-           // this.self = this;
+            // this.self = this;
             this.day = '';
             this.startTime = ''
             this.endTime = '';
         }
-        
-        RequestForShipping = function (rName,rId) {
+
+        RequestForShipping = function (rName, rId) {
             this.name = rName;
             this.id = rId;
             this.packageCounter = 0;
-            this.packageDefinitions = [new PackageDefinition(this.id + "afs",this.packageCounter++)];
+            this.packageDefinitions = [new PackageDefinition(this.id + "afs", this.packageCounter++)];
             this.packageDefinitions[0].SetIndex(0);
             this.pickUpDate = (new Date()).toDateString();
             this.addPackage = function () {
-                var pd = new PackageDefinition(this.id+"afs",this.packageCounter++);
+                var pd = new PackageDefinition(this.id + "afs", this.packageCounter++);
                 pd.SetIndex(this.packageDefinitions.length);
                 this.packageDefinitions.push(pd);
             }
@@ -78,73 +78,94 @@
 
         var app = angular.module('mockup', []);
         //////SERVICES/////////////////////////////////////////////////
-        sharedSvc = function(){
-           this.onLogin = function(){};   
+        sharedSvc = function () {
+            this.onLogin = function () { };
         }
-        app.factory('shared',[function(){
+        app.factory('shared', [function () {
             return new sharedSvc();
-        }]);
-        //////CONTROLLERS//////////////////////////////////////////////
-        
-        app.controller('topMenuController',['$scope','$http','shared',function($scope,$http,shared){
-            $scope.login = function(){
-                var userName = $('#txtUserName').val();
-                var password = $('#txtPassword').val();
-                $http.post('/auth',{userName:userName,password:password}).
-                success(function(data,status,headers,config){
-                    if(data.success){
-                        shared.onLogin();
-                    }
-                    else{
-                        alert(data.description);
-                    }
-                }).
-                error(function(data,status,headers,config){
-                    alert('error');
-                });
+        } ]);
+        ///////DIRECTIVES///////////////////////////////////////////////
+        app.directive('onRepeatFinishedDirective', function ($timeout) {
+            return function (scope, element, attrs) {
+                if (scope.$last) {
+                    var callBack = 'scope.' + attrs.onRepeatFinishedDirective;
+                    $timeout(function () {
+                        eval(callBack);
+                    });
+                }
             };
-        }]);
+        })
+        //////CONTROLLERS//////////////////////////////////////////////
+        app.controller('topMenuController', ['$scope', '$http', 'shared', function ($scope, $http, shared) {
+            $scope.menu = shared.menu;
+            $scope.setup = function () {
+                    debugger;
 
-        angular.module("mockup").controller('mainController', ['$scope','shared', function ($scope,shared) {
-            $scope.topMenu = "./controls/login.html?"+Math.random();
-           
-           shared.onLogin = function(){
-               $scope.topMenu = './controls/topmenu.html?'+Math.random();
-               $scope.template = "./pages/AskForSending.html?" + Math.random();
-
-           }
-            $scope.switch = function ($event) {
-                $("li").removeClass("active");
-                var li = $("#" + $event.currentTarget.id).parent();
-                li.addClass("active");
-                switch ($event.currentTarget.id) {
-                    case "rfs":
-                        $scope.template = "./pages/AskForSending.html?"+Math.random();
+                if ($scope.menu.menu[$scope.menu.defaultPageId] !== undefined) {
+                    shared.switchPage($scope.menu.defaultPageId);
+                }
+                else {
+                    for (key in $scope.menu.menu) {
+                        shared.switchPage(key);
                         break;
-                    case "areaOfInterest":
-                        $scope.template = "./pages/DefineInterest.html?"+Math.random();
-                        break;
-                    case "givePrice":
-                        $scope.template = "./pages/GivePrice.html?"+Math.random();
-                        break;
-                    default:
-                        $scope.template = "";
-                        break;
+                    }
                 }
             }
-        }]);
+            $scope.switchPage = function (id) {
+                shared.switchPage(id);
+            }
+        } ]);
+        app.controller('loginController', ['$scope', '$http', 'shared', function ($scope, $http, shared) {
+            $scope.login = function () {
+                var userName = $('#txtUserName').val();
+                var password = $('#txtPassword').val();
+                $http.post('/auth', { userName: userName, password: password }).
+                        success(function (data, status, headers, config) {
+                            if (data.success) {
+                                shared.menu = data.menu;
+                                shared.onLogin();
+                            }
+                            else {
+                                alert(data.description); //////
+                            }
+                        }).
+                        error(function (data, status, headers, config) {
+                            alert('error');
+                        });
+            };
+        } ]);
+
+        angular.module("mockup").controller('mainController', ['$scope', 'shared', function ($scope, shared) {
+            $scope.topMenu = "./controls/login.html?" + Math.random();
+
+            shared.switchPage = function (id) {
+                $("li").removeClass("active");
+                var liId = "#topMenuItem" + id;
+                var li = $(liId);
+                li.addClass("active");
+                if (shared.menu.menu[id].Link !== '') {
+                    $scope.template = shared.menu.menu[id].Link + '?' + Math.random();
+                }
+                else {
+                    $scope.template = "";
+                }
+            }
+            shared.onLogin = function () {
+                $scope.topMenu = './controls/topmenu.html?' + Math.random();
+            }
+        } ]);
         angular.module("mockup").controller("interestDayAndTimeFrameController", ['$scope', function ($scope) {
             $scope.daysOfInterest = [];
             $scope.daysOfInterest.push(new TimeFrameOfInterest());
             $scope.addDay = function () {
                 $scope.daysOfInterest.push(new TimeFrameOfInterest());
             }
-        }]);
+        } ]);
         ///AskForSending Controller
         angular.module("mockup").controller("askForSendingController", ['$scope', function ($scope) {
             $scope.requests = [new RequestForShipping("בקשה 1", "request0")];
             $scope.tabs = [$scope.requests[0]];
-            
+
             $scope.hideAllTabs = function () {
                 for (var i = 0; i < $scope.requests.length; i++) {
                     $("#" + $scope.requests[i].id).css("display", "none");
@@ -152,7 +173,7 @@
             }
             $scope.showTab = function (reqId) {
                 var req = $scope.getRequestById(reqId);
-                        $("#" +req.id).css("display", "block");
+                $("#" + req.id).css("display", "block");
             }
             $scope.getRequestById = function (reqId) {
                 for (var i = 0; i < $scope.requests.length; i++) {
@@ -162,15 +183,15 @@
                 }
             }
             $scope.removePackage = function (reqId, index) {
-               
+
                 var req = $scope.getRequestById(reqId);
                 req.packageDefinitions.splice(index, 1);
             }
             $scope.sendRequest = function (id) {
                 $("#" + id + " :input").prop("disabled", true);
-            /*    $.each(inp, function ( idx,e) {
-                    debugger;
-                    e.prop("disabled", true);
+                /*    $.each(inp, function ( idx,e) {
+                debugger;
+                e.prop("disabled", true);
                 });*/
             }
             $scope.addRequest = function () {
@@ -181,34 +202,34 @@
                 this.showTab(req.id);
                 $scope.switchTab("tab" + req.id, req.id);
             }
-            $scope.switchTab = function (liId,tabId) {
+            $scope.switchTab = function (liId, tabId) {
                 $("ul[id='requestsMenu'] > li").removeClass("active");
-                var li = $("#" +liId);
+                var li = $("#" + liId);
                 li.addClass("active");
                 $scope.hideAllTabs();
                 $scope.showTab(tabId);
             }
             $scope.switchTab("tab" + $scope.requests[0].id, $scope.requests[0].id);
 
-        }]);
+        } ]);
 
         angular.module("mockup").controller("defineInterestController", ['$scope', function ($scope) {
             $scope.packageCounter = 0;
-            $scope.packageDefinitions = [new PackageDefinition("di",$scope.packageCounter++)];
+            $scope.packageDefinitions = [new PackageDefinition("di", $scope.packageCounter++)];
             $scope.packageDefinitions[0].SetIndex(0);
             $scope.addPackage = function () {
-                var pd = new PackageDefinition("di",$scope.packageCounter++);
+                var pd = new PackageDefinition("di", $scope.packageCounter++);
                 pd.SetIndex($scope.packageDefinitions.length);
                 $scope.packageDefinitions.push(pd);
             }
             $scope.areas = [{ key: 1, value: 'חיפה והסביבה' },
-                            { key: 2, value: 'ירושלים' },
-                            { key: 3, value: 'תל אביב הגדולה' },
-                            { key: 4, value: 'באר שבע והסביבה' },
-                            { key: 5, value: 'אילת' },
-                            { key: 6, value: 'נהריה' },
-                            { key: 7, value: 'קרית גת' }];
-        }]);
+                                    { key: 2, value: 'ירושלים' },
+                                    { key: 3, value: 'תל אביב הגדולה' },
+                                    { key: 4, value: 'באר שבע והסביבה' },
+                                    { key: 5, value: 'אילת' },
+                                    { key: 6, value: 'נהריה' },
+                                    { key: 7, value: 'קרית גת'}];
+        } ]);
 
 
         angular.module("mockup").directive('dateFix', function () {

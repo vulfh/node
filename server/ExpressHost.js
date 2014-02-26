@@ -44,7 +44,6 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	}
 ////////////////////////////////////////////////////////////////////////
 	ExpressHost.prototype.controllerHandler = function (controller, req, res) {
-	    debugger;
 	    var urlParts = url.parse(req.url, true, true);
 	    var query = urlParts.query;
 	    var pathName = urlParts.pathname.toUpperCase();

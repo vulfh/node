@@ -1,4 +1,4 @@
-var User = require('./user.js');
+var User = require('./user/user.js');
 var Authentication = function (db) {
     var _self = this;
     var dbService = db;
@@ -6,7 +6,6 @@ var Authentication = function (db) {
 
     function Login(req, res) {
         var resultMessage = { success: false, description: 'unknown', data: null };
-        debugger;
         if (req.GetPostParam('userName') !== null && req.GetPostParam('password') !== null) {
             var user = new User();
             user.userName = req.GetPostParam('userName');
@@ -16,6 +15,7 @@ var Authentication = function (db) {
                 resultMessage.success = true;
                 resultMessage.data = authUser;
                 resultMessage.description = 'authenticated';
+                resultMessage.menu = dbService.GetMenu(authUser);
             }
             else {
                 resultMessage.success = false;
