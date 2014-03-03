@@ -99,8 +99,6 @@
         app.controller('topMenuController', ['$scope', '$http', 'shared', function ($scope, $http, shared) {
             $scope.menu = shared.menu;
             $scope.setup = function () {
-                    debugger;
-
                 if ($scope.menu.menu[$scope.menu.defaultPageId] !== undefined) {
                     shared.switchPage($scope.menu.defaultPageId);
                 }

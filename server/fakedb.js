@@ -11,30 +11,27 @@ var FakeDb = function () {
                  "5": new Item('חשבון שלי','',"5",[new UserPermission(UserPermission.Sender,false),
                                                     new UserPermission(UserPermission.Provider,false)])};
 }
-FakeDb.prototype.Login = function (user) {
+FakeDb.prototype.Login = function (user, resultHandler) {
     if (user.userName === 'provider1' && user.password === '1234') {
         user.id = 26877;
         user.AddPermission(new UserPermission(UserPermission.Provider));
-        return user;
+        if (resultHandler != null) {
+            resultHandler(null, user);
+        }
     } else if (user.userName === 'sender1' && user.password === '1234') {
         user.id = 25214;
         user.AddPermission(new UserPermission(UserPermission.Sender));
-        return user;
+        if (resultHandler != null) {
+            resultHandler(null, user);
+        }
     }
     else {
-        return null;
+        resultHandler({ message: 'user not authenticated!' }, null);
     }
 }
 
-FakeDb.prototype.GetMenu = function (user) {
-    var menu = {};
-    for (key in this.Menu) {
-        var i = this.Menu[key];
-        if (i.CheckPermissionMask(user.GetPermissionMask()) === true) {
-            menu[key.toString()] = i;
-        }
-    }
-    debugger;
-    return { defaultPageId: "3", menu: menu };
+FakeDb.prototype.GetMenu = function (errorHnadler,  resultHandler) {
+    resultHandler(this.Menu);
+
 }
 module.exports = FakeDb;

@@ -1,6 +1,8 @@
 var express = require('express');
 var Controller = require('./controller.js');
-var Authentication = require('./authentication.js')
+var Authentication = require('./user/authentication.js');
+var Authorization = require('./user/authorization.js');
+
 var FakeDB = require('./fakedb.js');
 /*var app = express();
 
@@ -22,13 +24,11 @@ if(app === undefined)
 	console.log('oops');
 app.addFolder('../scripts');
 app.addFolder('../pages');
-app.addFolder("../");
+app.addFolder('../');
 app.addFolder('../images');
 app.addFolder('../styles/bootstrap/css');
 app.addFolder('../styles/bootstrap/fonts');
 app.addFolder('../styles/bootstrap/js');
-
-app.setControllers([new Controller('/test', function (req, res) {console.log('q parameter is %s',req.QueryParams.q);res.send('ok'); }, "GET"),
-                    new Controller('/auth',new Authentication(new FakeDB()),'POST')], function (err) { });
+app.setControllers([new Controller('/auth',new Authentication(new FakeDB(),new Authorization()),'POST')], function (err) { });
 app.start();
 
