@@ -1,5 +1,7 @@
  <nav class="navbar navbar-default" role="navigation">
             <div ng-controller="topMenuController" class="collapse navbar-collapse" style="direction:rtl;float:right">
+                שלום,
+                {{userName}}
                 <ul class="nav navbar-nav">
                     <li ng-repeat="mi in menu.menu" id="topMenuItem{{mi.Id}}" on-repeat-finished-directive="setup()">
                         <a id="areaOfInterest" href="#" data-toggle="tab" ng-click="switchPage(mi.Id)">{{mi.Caption}}</a>

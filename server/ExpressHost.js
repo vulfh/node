@@ -1,5 +1,6 @@
 var express =require('express');
 var path = require('path');
+var http = require('http');
 var controller = require('./controller.js');
 var Request = require('./request.js');
 var Response = require('./response.js');
@@ -17,17 +18,21 @@ var ExpressHost = function (port) {
     this.folders = [];
     this.controllers = [];
 
-    this.expressServer = express();
-    this.expressServer.use(express.bodyParser());
+    this.expressApp = express();
+    this.expressApp.use(express.bodyParser());
+    this.expressApp.use(express.json());
+    this.expressApp.use(express.urlencoded());
+    this.expressApp.use(express.cookieParser('your secret here'));
+    this.expressApp.use(express.session());
 
     this.start = function (port) {
         if (port !== undefined && port != null)
             this.port = port;
         for (var i = 0; i < this.folders.length; i++) {
-            this.expressServer.use(express.static(this.folders[i]));
+            this.expressApp.use(express.static(this.folders[i]));
         }
-        this.expressServer.listen(this.port);
-        //start listne to dynamic urls
+        this.expressApp.listen(this.port);
+        //start listen to dynamic urls
         this.startListen();
     }
 }
@@ -49,7 +54,7 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	    var pathName = urlParts.pathname.toUpperCase();
 	    console.log(query);
 	    console.log(pathName);
-	    var request = new Request(query, req.body);
+	    var request = new Request(query, req.body,req.session);
 	    var response = new Response(res);
 	    console.log(req);
 	    controller.handler(request, response);
@@ -68,10 +73,10 @@ ExpressHost.prototype.addFolder =  function(folderName){
         var delegate = new ExpressHandlerDelegate(this, ctrl, this.controllerHandler);
          switch (ctrl.protocol) {
 	            case 'GET':
-                 this.expressServer.get(ctrl.path, delegate);
+                 this.expressApp.get(ctrl.path, delegate);
 	                break;
 	            case 'POST':
-                 this.expressServer.post(ctrl.path, delegate);
+                 this.expressApp.post(ctrl.path, delegate);
 	                break;
 	        }
 

@@ -55,6 +55,7 @@
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="scripts/packages.js" type="text/javascript" ></script>
     <script type="text/javascript">
+        var user = undefined;
         TimeFrameOfInterest = function () {
             // this.self = this;
             this.day = '';
@@ -79,7 +80,20 @@
         var app = angular.module('mockup', []);
         //////SERVICES/////////////////////////////////////////////////
         sharedSvc = function () {
+            var user = undefined;
             this.onLogin = function () { };
+            this.processLoginResponse = function (data,shared, handler) {
+                if (data.success) {
+                    shared.menu = data.menu;
+                    shared.user = data.data;
+                    shared.onLogin();
+
+                }
+                if (handler !== undefined) {
+                    handler(data);
+                }
+
+            }
         }
         app.factory('shared', [function () {
             return new sharedSvc();
@@ -99,6 +113,7 @@
         app.controller('topMenuController', ['$scope', '$http', 'shared', function ($scope, $http, shared) {
             $scope.menu = shared.menu;
             $scope.setup = function () {
+                $scope.userName = shared.user.userName;
                 if ($scope.menu.menu[$scope.menu.defaultPageId] !== undefined) {
                     shared.switchPage($scope.menu.defaultPageId);
                 }
@@ -117,15 +132,14 @@
             $scope.login = function () {
                 var userName = $('#txtUserName').val();
                 var password = $('#txtPassword').val();
+
                 $http.post('/auth', { userName: userName, password: password }).
                         success(function (data, status, headers, config) {
-                            if (data.success) {
-                                shared.menu = data.menu;
-                                shared.onLogin();
-                            }
-                            else {
-                                alert(data.description); //////
-                            }
+                            shared.processLoginResponse(data,shared, function (data) {
+                                if (data.success !== true) {
+                                    alert(data.description);
+                                }
+                            });
                         }).
                         error(function (data, status, headers, config) {
                             alert('error');
@@ -133,8 +147,20 @@
             };
         } ]);
 
-        angular.module("mockup").controller('mainController', ['$scope', 'shared', function ($scope, shared) {
-            $scope.topMenu = "./controls/login.html?" + Math.random();
+        angular.module("mockup").controller('mainController', ['$scope','$http', 'shared', function ($scope,$http, shared) {
+
+            $http.post('/auth')
+            .success(function (data, status, headers, config) {
+                shared.processLoginResponse(data,shared,function(data){
+                    if(data.success!== true){
+                         $scope.topMenu = "./controls/login.html?" + Math.random();
+                    }
+                });
+            })
+            .error(function(data,status,headers,config){
+                
+            });
+           
 
             shared.switchPage = function (id) {
                 $("li").removeClass("active");
