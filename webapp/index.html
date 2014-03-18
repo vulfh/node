@@ -82,7 +82,7 @@
         sharedSvc = function () {
             var user = undefined;
             this.onLogin = function () { };
-            this.processLoginResponse = function (data,shared, handler) {
+            this.processLoginResponse = function (data, shared, handler) {
                 if (data.success) {
                     shared.menu = data.menu;
                     shared.user = data.data;
@@ -132,10 +132,9 @@
             $scope.login = function () {
                 var userName = $('#txtUserName').val();
                 var password = $('#txtPassword').val();
-
                 $http.post('/auth', { userName: userName, password: password }).
                         success(function (data, status, headers, config) {
-                            shared.processLoginResponse(data,shared, function (data) {
+                            shared.processLoginResponse(data, shared, function (data) {
                                 if (data.success !== true) {
                                     alert(data.description);
                                 }
@@ -147,20 +146,20 @@
             };
         } ]);
 
-        angular.module("mockup").controller('mainController', ['$scope','$http', 'shared', function ($scope,$http, shared) {
+        angular.module("mockup").controller('mainController', ['$scope', '$http', 'shared', function ($scope, $http, shared) {
 
             $http.post('/auth')
             .success(function (data, status, headers, config) {
-                shared.processLoginResponse(data,shared,function(data){
-                    if(data.success!== true){
-                         $scope.topMenu = "./controls/login.html?" + Math.random();
+                shared.processLoginResponse(data, shared, function (data) {
+                    if (data.success !== true) {
+                        $scope.topMenu = "./controls/login.html?" + Math.random();
                     }
                 });
             })
-            .error(function(data,status,headers,config){
-                
+            .error(function (data, status, headers, config) {
+
             });
-           
+
 
             shared.switchPage = function (id) {
                 $("li").removeClass("active");
@@ -186,7 +185,7 @@
             }
         } ]);
         ///AskForSending Controller
-        angular.module("mockup").controller("askForSendingController", ['$scope', function ($scope) {
+        angular.module("mockup").controller("askForSendingController", ['$scope', '$http', 'shared', function ($scope, $http, shared) {
             $scope.requests = [new RequestForShipping("בקשה 1", "request0")];
             $scope.tabs = [$scope.requests[0]];
 
@@ -212,7 +211,12 @@
                 req.packageDefinitions.splice(index, 1);
             }
             $scope.sendRequest = function (id) {
-                $("#" + id + " :input").prop("disabled", true);
+                var req = $scope.getRequestById(id);
+                $http.post('/afs', { request: req, user: shared.user })
+                .success(function (data, status, headers, config) {
+                    $("#" + id + " :input").prop("disabled", true);
+                })
+                .error(function (data, status, headers, config) { });
                 /*    $.each(inp, function ( idx,e) {
                 debugger;
                 e.prop("disabled", true);
@@ -239,6 +243,7 @@
 
         angular.module("mockup").controller("defineInterestController", ['$scope', function ($scope) {
             $scope.packageCounter = 0;
+            $scope.name = "";
             $scope.packageDefinitions = [new PackageDefinition("di", $scope.packageCounter++)];
             $scope.packageDefinitions[0].SetIndex(0);
             $scope.addPackage = function () {

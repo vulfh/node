@@ -4,6 +4,7 @@ var http = require('http');
 var controller = require('./controller.js');
 var Request = require('./request.js');
 var Response = require('./response.js');
+var Cache = require('./cache/cache.js');
 var url = require('url');
 
 function ExpressHandlerDelegate(host,ctrl,handler){
@@ -17,7 +18,8 @@ var ExpressHost = function (port) {
     this.port = port;
     this.folders = [];
     this.controllers = [];
-
+    this.Cache = new Cache();
+    debugger;
     this.expressApp = express();
     this.expressApp.use(express.bodyParser());
     this.expressApp.use(express.json());
@@ -38,7 +40,7 @@ var ExpressHost = function (port) {
 }
 ////////PROTOTYPE//////////////////////////////////////////////////////////
 ExpressHost.prototype.addFolder =  function(folderName){
-		this.folders.push(path.join(__dirname,folderName));
+		this.folders.push(path.join(path.join(__dirname,'..'),folderName));
 	}
 /////////////////////////////////////////////////////////////////////////////
 	ExpressHost.prototype.setControllers = function (controllers, errHandler) {
@@ -49,14 +51,15 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	}
 ////////////////////////////////////////////////////////////////////////
 	ExpressHost.prototype.controllerHandler = function (controller, req, res) {
+	    debugger;
 	    var urlParts = url.parse(req.url, true, true);
 	    var query = urlParts.query;
 	    var pathName = urlParts.pathname.toUpperCase();
-	    console.log(query);
-	    console.log(pathName);
-	    var request = new Request(query, req.body,req.session);
+	    // console.log(query);
+	    //console.log(pathName);
+	    var request = new Request(query, req.body, req.session, controller.Cache);
 	    var response = new Response(res);
-	    console.log(req);
+	    // console.log(req);
 	    controller.handler(request, response);
 	}
 ////////////////////////////////////////////////////////////////////////
@@ -64,7 +67,8 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	    console.log('start listen ...');
 	    for (var i = 0; i < this.controllers.length; i++) {
 	        var ctrl = this.controllers[i];
-	        console.log('listening %s on %s',ctrl.protocol, ctrl.path);
+	        ctrl.Cache = this.Cache;
+	        console.log('listening %s on %s', ctrl.protocol, ctrl.path);
 	        this.attachController(ctrl);
 	    }
 	}

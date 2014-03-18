@@ -96,7 +96,7 @@ LargePackage.prototype = new Package();
 
 ////////////PLATFORM//////////////////////
 Platform = function (inLoop) {
-    this.self = this;
+    //this.self = this;
     Package.call(this);
 
     this.Name = "משטח";
@@ -111,7 +111,7 @@ Platform = function (inLoop) {
 Platform.prototype = new Package();
 
 SafePlatform = function () {
-       this.self = this;
+  ///     this.self = this;
        Platform.call(this, true);
        this.Length = 155;
        this.Width = 195;
@@ -123,7 +123,7 @@ SafePlatform = function () {
 SafePlatform.prototype = new Platform(true);
 RegularPlatform = function () {
    
-    this.self = this;
+//    this.self = this;
     Platform.call(this, true);
     this.Length = 150;
     this.Width = 200;

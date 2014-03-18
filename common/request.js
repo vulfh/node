@@ -1,8 +1,8 @@
-var Request = function (queryParams, postBody, session) {
+var Request = function (queryParams, postBody, session, cache) {
     this.PostParams = postBody;
     this.Query = [];
     this.QueryParams = queryParams;
-    debugger;
+    this.Cache = cache;
     this.Session = session;
 
     console.log('Start passing through the params of the query ...');

@@ -5,6 +5,9 @@ var User = function () {
     this.id = null;
     this.permissions = [];
     this.permissionMask = 0;
+    this.GetPermissionMask = function () {
+    return this.permissionMask;
+    }
 
 }
 //////////////////////////////////////////////////////////////////
@@ -22,7 +25,5 @@ User.prototype.AddPermission = function (permission) {
     this.permissionMask = (this.permissionMask | permission.CurrentPermission);
 }
 /////////////////////////////////////////////////////////////////
-User.prototype.GetPermissionMask = function () {
-    return this.permissionMask;
-}
+
 module.exports = User;

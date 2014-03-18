@@ -1,47 +1,43 @@
-var User = require('./user.js');
+var Utils = require('util');
+var User = require('../../common/user/user.js');
 var Authorization = require('./authorization.js');
-var crypto = require('crypto');
+var ControllerHandler = require('../../common/controllerhandler.js');
+
 var Authentication = function (db, authorization) {
     var _self = this;
     var dbService = db;
     var authService = authorization;
-    var response = null;
-    var request = null;
-    var resultMessage = { success: false, description: 'unknown', data: null };
-    function Encrypt(data) {
-        var shasum = crypto.createHash('sha1');
-        shasum.update(data);
-        return shasum.digest('hex');
-    }
+    resultMessage = {};
+
+
     function LoginBegin(req, res, auth) {
         response = res;
         request = req;
-        debugger;
-        if (request.Session.userContext !== undefined) {
-            response.send(request.Session.userContext);
-        } else {
-            if (req.GetPostParam('userName') !== null && req.GetPostParam('password') !== null) {
-                var user = new User();
-                user.userName = req.GetPostParam('userName');
-                user.password = req.GetPostParam('password');
-                dbService.Login(user, LoginEnd);
-            }
-            else {
-                resultMessage.success = false;
-                resultMessage.description = 'userName or password is missing!';
-                res.send(resultMessage);
-            }
+        console.log('request arrived ...');
+        if (req.GetPostParam('userName') !== null && req.GetPostParam('password') !== null) {
+            var user = new User();
+            user.userName = req.GetPostParam('userName');
+            user.password = req.GetPostParam('password');
+            dbService.Login(user, LoginEnd);
+        }
+        else {
+            console.log('user not found !');
+            resultMessage.success = false;
+            resultMessage.description = 'userName or password is missing!';
+            res.send(resultMessage);
         }
     }
 
     function LoginEnd(error, authUser) {
+        debugger;
         if (error === null) {
             if (authUser !== null) {
                 resultMessage.success = true;
-                resultMessage.data = { userName: authUser.userName, userId: Encrypt(authUser.id.toString()) };
-                resultMessage.description = 'authenticated';
 
-                authService(authUser, dbService, AuthorizationHandler);
+                request.Cache.AddItem(authUser.id, authUser);
+                resultMessage.data = authUser;
+                resultMessage.description = 'authenticated';
+                response.send(resultMessage);
             }
             else {
                 resultMessage.success = false;
@@ -65,4 +61,5 @@ var Authentication = function (db, authorization) {
     }
     return function (req, res) { LoginBegin(req, res) };
 }
+Utils.inherits(Authentication,ControllerHandler);
 module.exports = Authentication;

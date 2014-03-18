@@ -1,5 +1,5 @@
-var User = require('./user.js');
-var UserPermission = require('./userpermission.js');
+var User = require('../../common/user/user.js');
+var UserPermission = require('../../common/user/userpermission.js');
 
 var Authorization = function () {
         var userAuthorizedHandler = null;

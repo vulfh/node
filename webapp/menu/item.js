@@ -1,4 +1,4 @@
-var Permission = require('./../user/userpermission.js');
+var Permission = require('../../common/user/userpermission.js');
 var Item = function (caption, link, id, permissions) {
     var self = this;
     this.Link = link;

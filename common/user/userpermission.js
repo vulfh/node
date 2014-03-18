@@ -22,10 +22,16 @@ UserPermission.prototype.CheckPermissionByMask = function (mask) {
             if ((this.CurrentPermission | mask) === this.CurrentPermission) {
                 return true;
             }
+            else {
+                return false;
+            }
         }
-        else{
-             if ((this.CurrentPermission & mask) === this.CurrentPermission) {
+        else {
+            if ((this.CurrentPermission & mask) === this.CurrentPermission) {
                 return true;
+            }
+            else {
+                return false;
             }
         }
     }
