@@ -19,7 +19,6 @@ var ExpressHost = function (port) {
     this.folders = [];
     this.controllers = [];
     this.Cache = new Cache();
-    debugger;
     this.expressApp = express();
     this.expressApp.use(express.bodyParser());
     this.expressApp.use(express.json());
@@ -51,7 +50,6 @@ ExpressHost.prototype.addFolder =  function(folderName){
 	}
 ////////////////////////////////////////////////////////////////////////
 	ExpressHost.prototype.controllerHandler = function (controller, req, res) {
-	    debugger;
 	    var urlParts = url.parse(req.url, true, true);
 	    var query = urlParts.query;
 	    var pathName = urlParts.pathname.toUpperCase();
