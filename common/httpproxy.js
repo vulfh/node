@@ -20,7 +20,6 @@ HttpProxy.Post = function (host, port, path, data, err, callback) {
         response.on('end', function () {
             try {
                 var responseObj = JSON.parse(responseStr);
-                debugger;
                 callback(responseObj);
             }
             catch (error) {

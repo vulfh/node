@@ -21,31 +21,15 @@ FakeDb.prototype.Login = function (user, resultHandler) {
             for (var pc = 0; pc < this.Users[uc].permissions.length; pc++) {
                 user.AddPermission(this.Users[uc].permissions[pc]);
             }
-            //user.AddPermission(new UserPermission(UserPermission.Provider));
             if (resultHandler != null) {
                 resultHandler(null, user);
-                break;
+                return; ;
             }
         }
     }
-    /*
-    if (user.userName === 'provider1' && user.password === '1234') {
-    user.id = 26877;
-    user.AddPermission(new UserPermission(UserPermission.Provider));
-    if (resultHandler != null) {
-    resultHandler(null, user);
-    }
-    } else if (user.userName === 'sender1' && user.password === '1234') {
-    user.id = 25214;
-    user.AddPermission(new UserPermission(UserPermission.Sender));
-    if (resultHandler != null) {
-    resultHandler(null, user);
-    }
-    }
-    else {
-    resultHandler({ message: 'user not authenticated!' }, null);
-    }
-    */
+    if(resultHandler!== undefined){
+          resultHandler({message:"User not found !",code:-1},user);
+     }
 }
 
 FakeDb.prototype.GetMenu = function (errorHnadler,  resultHandler) {

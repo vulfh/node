@@ -85,7 +85,7 @@
             this.processLoginResponse = function (data, shared, handler) {
                 if (data.success) {
                     shared.menu = data.menu;
-                    shared.user = data.data;
+                    shared.user = data.user;
                     shared.onLogin();
 
                 }

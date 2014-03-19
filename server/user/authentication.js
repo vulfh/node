@@ -1,12 +1,10 @@
 var Utils = require('util');
 var User = require('../../common/user/user.js');
-var Authorization = require('./authorization.js');
 var ControllerHandler = require('../../common/controllerhandler.js');
 
-var Authentication = function (db, authorization) {
+var Authentication = function (db) {
     var _self = this;
     var dbService = db;
-    var authService = authorization;
     resultMessage = {};
 
 
@@ -29,7 +27,7 @@ var Authentication = function (db, authorization) {
     }
 
     function LoginEnd(error, authUser) {
-        debugger;
+        ;
         if (error === null) {
             if (authUser !== null) {
                 resultMessage.success = true;
@@ -42,7 +40,7 @@ var Authentication = function (db, authorization) {
             else {
                 resultMessage.success = false;
                 resultMessage.data = user;
-                resultMessage.description = 'authentication failed';
+                resultMessage.description = 'authentication failed. reason:'+error;
                 response.send(resultMessage);
             }
         }
@@ -52,12 +50,6 @@ var Authentication = function (db, authorization) {
             response.send(resultMessage);
         }
 
-    }
-
-    function AuthorizationHandler(menuResult) {
-        resultMessage.menu = menuResult;
-        request.Session.userContext = resultMessage;
-        response.send(resultMessage);
     }
     return function (req, res) { LoginBegin(req, res) };
 }

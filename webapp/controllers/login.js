@@ -15,10 +15,8 @@ var Login = function (db, apiConnector) {
     }
     function BuildUserMenu() {
         return function (menu) {
-            debugger;
             var userMenu = {};
             Object.keys(menu).forEach(function (m, idx) {
-                debugger;
                 var item = menu[m];
                 if (item.CheckPermissionMask(authUser.permissionMask) === true) {
                     userMenu[m.toString()] = item;
@@ -51,8 +49,9 @@ var Login = function (db, apiConnector) {
                                             authUser = data.data;
                                             request.Session.userContext = data.data;
                                             var encUserId = Encrypt(data.data.id.toString());
-                                            resultMessage.userId = encUserId;
-                                            resultMessage.userName = data.data.userName,
+                                            resultMessage.user = {};
+                                            resultMessage.user.userId = encUserId;
+                                            resultMessage.user.userName = data.data.userName,
                                                 resultMessage.success = true;
                                             dbService.GetMenu(function (error) {
                                                 console.log(error);
