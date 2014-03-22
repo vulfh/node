@@ -27,8 +27,7 @@ var Authentication = function (db) {
     }
 
     function LoginEnd(error, authUser) {
-        ;
-        if (error === null) {
+        if (error.code === 0) {
             if (authUser !== null) {
                 resultMessage.success = true;
 
@@ -40,7 +39,7 @@ var Authentication = function (db) {
             else {
                 resultMessage.success = false;
                 resultMessage.data = user;
-                resultMessage.description = 'authentication failed. reason:'+error;
+                resultMessage.description = 'authentication failed. reason:' + error;
                 response.send(resultMessage);
             }
         }

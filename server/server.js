@@ -4,6 +4,7 @@ var Authentication = require('./user/authentication.js');
 var SubmitSendingRequest = require('./bl/submitsendingrequest.js');
 
 var FakeDB = require('../unittests/fakedb.js');
+var Dal = require('../common/dal/db.js');
 
 delete require.cache[require.resolve('../common/ExpressHost.js')];
 var expressHost = require('../common/ExpressHost.js');
@@ -14,7 +15,7 @@ if (app === undefined)
 else
     console.log('API SERVER started ...');
 
-app.setControllers([new Controller('/authenticate',new Authentication(new FakeDB()),'POST')
+app.setControllers([new Controller('/authenticate',new Authentication(new Dal()),'POST')
                    ,new Controller('/afs',new SubmitSendingRequest(new FakeDB()),'POST')], function (err) { });
 app.start();
 

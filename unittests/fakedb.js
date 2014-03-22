@@ -22,7 +22,7 @@ FakeDb.prototype.Login = function (user, resultHandler) {
                 user.AddPermission(this.Users[uc].permissions[pc]);
             }
             if (resultHandler != null) {
-                resultHandler(null, user);
+                resultHandler({message:'Ok',code:0}, user);
                 return; ;
             }
         }

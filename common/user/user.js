@@ -8,22 +8,23 @@ var User = function () {
     this.GetPermissionMask = function () {
     return this.permissionMask;
     }
+//////////////////////////////////////////////////////////////////
+    this.HasPermission = function (permission) {
+            for (p in this.permissions) {
+                if (p.CurrentPermission === permission) {
+                    return true;
+                }
+        }
+        return false;
+    }
+/////////////////////////////////////////////////////////////////
+    this.AddPermission = function (permission) {
+        this.permissions.push(permission);
+        this.permissionMask = (this.permissionMask | permission.CurrentPermission);
+    }
 
 }
-//////////////////////////////////////////////////////////////////
-User.prototype.HasPermission = function (permission) {
-    for (p in this.permissions) {
-        if (p.CurrentPermission === permission) {
-            return true;
-        }
-    }
-    return false;
-}
-/////////////////////////////////////////////////////////////////
-User.prototype.AddPermission = function (permission) {
-    this.permissions.push(permission);
-    this.permissionMask = (this.permissionMask | permission.CurrentPermission);
-}
+
 /////////////////////////////////////////////////////////////////
 
 module.exports = User;
