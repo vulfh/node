@@ -1,19 +1,22 @@
-var Request = function (queryParams, postBody, session, cache) {
+var CommonMethods = require('./commonmethods.js');
+var Request = function (queryParams, postBody, cache,cookies) {
     this.PostParams = postBody;
-    this.Query = [];
-    this.QueryParams = queryParams;
+    this.Query = {};
+    this.QueryParams  = queryParams;
     this.Cache = cache;
-    this.Session = session;
+    this.Cookies = cookies;
+   
 
     console.log('Start passing through the params of the query ...');
     for (var param in this.QueryParams) {
         this.AddQueryParam(param, this.QueryParams[param]);
     }
+    
 }
 Request.prototype.AddQueryParam = function (key,value) {
     
-    console.log(" adding param %s",key);
-    this.Query.push({ key: value });
+    console.log(" adding param %s : %s",key,value);
+    this.Query[key]=value;
 }
 Request.prototype.GetQueryParam = function (name) {
     if (this.Query !== null && this.Query !== undefined) {
