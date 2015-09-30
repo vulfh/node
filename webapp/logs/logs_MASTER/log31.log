@@ -302,3 +302,139 @@
 2015-09-30T20:30:24.589Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1215, data=
 2015-09-30T20:30:24.590Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1215  : { success: true, description: 'ACK-60-1215', data: '' }  ....
 2015-09-30T20:30:24.590Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1215 sent to CLIENT
+2015-09-30T20:30:25.602Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1216 send request  to SERVER
+2015-09-30T20:30:25.605Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:25.605Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1216  : []  ....
+2015-09-30T20:30:25.606Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1216 sent to CLIENT
+2015-09-30T20:30:25.616Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1216 send request  to SERVER
+2015-09-30T20:30:25.619Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1216, data=
+2015-09-30T20:30:25.619Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1216  : { success: true, description: 'ACK-60-1216', data: '' }  ....
+2015-09-30T20:30:25.620Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1216 sent to CLIENT
+2015-09-30T20:30:26.698Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1217 send request  to SERVER
+2015-09-30T20:30:26.702Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:26.702Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1217  : []  ....
+2015-09-30T20:30:26.703Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1217 sent to CLIENT
+2015-09-30T20:30:26.713Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1217 send request  to SERVER
+2015-09-30T20:30:26.716Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1217, data=
+2015-09-30T20:30:26.716Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1217  : { success: true, description: 'ACK-60-1217', data: '' }  ....
+2015-09-30T20:30:26.717Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1217 sent to CLIENT
+2015-09-30T20:30:27.731Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1218 send request  to SERVER
+2015-09-30T20:30:27.736Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:27.736Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1218  : []  ....
+2015-09-30T20:30:27.737Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1218 sent to CLIENT
+2015-09-30T20:30:27.750Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1218 send request  to SERVER
+2015-09-30T20:30:27.753Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1218, data=
+2015-09-30T20:30:27.753Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1218  : { success: true, description: 'ACK-60-1218', data: '' }  ....
+2015-09-30T20:30:27.754Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1218 sent to CLIENT
+2015-09-30T20:30:28.774Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1219 send request  to SERVER
+2015-09-30T20:30:28.778Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:28.778Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1219  : []  ....
+2015-09-30T20:30:28.779Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1219 sent to CLIENT
+2015-09-30T20:30:28.790Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1219 send request  to SERVER
+2015-09-30T20:30:28.794Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1219, data=
+2015-09-30T20:30:28.794Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1219  : { success: true, description: 'ACK-60-1219', data: '' }  ....
+2015-09-30T20:30:28.795Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1219 sent to CLIENT
+2015-09-30T20:30:29.807Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1220 send request  to SERVER
+2015-09-30T20:30:29.810Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:29.811Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1220  : []  ....
+2015-09-30T20:30:29.811Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1220 sent to CLIENT
+2015-09-30T20:30:29.822Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1220 send request  to SERVER
+2015-09-30T20:30:29.825Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1220, data=
+2015-09-30T20:30:29.826Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1220  : { success: true, description: 'ACK-60-1220', data: '' }  ....
+2015-09-30T20:30:29.826Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1220 sent to CLIENT
+2015-09-30T20:30:30.856Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1221 send request  to SERVER
+2015-09-30T20:30:30.859Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:30.859Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1221  : []  ....
+2015-09-30T20:30:30.860Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1221 sent to CLIENT
+2015-09-30T20:30:30.871Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1221 send request  to SERVER
+2015-09-30T20:30:30.874Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1221, data=
+2015-09-30T20:30:30.874Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1221  : { success: true, description: 'ACK-60-1221', data: '' }  ....
+2015-09-30T20:30:30.875Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1221 sent to CLIENT
+2015-09-30T20:30:31.930Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1222 send request  to SERVER
+2015-09-30T20:30:31.934Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:31.934Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1222  : []  ....
+2015-09-30T20:30:31.935Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1222 sent to CLIENT
+2015-09-30T20:30:31.946Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1222 send request  to SERVER
+2015-09-30T20:30:31.949Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1222, data=
+2015-09-30T20:30:31.950Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1222  : { success: true, description: 'ACK-60-1222', data: '' }  ....
+2015-09-30T20:30:31.950Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1222 sent to CLIENT
+2015-09-30T20:30:33.012Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1223 send request  to SERVER
+2015-09-30T20:30:33.015Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:33.016Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1223  : []  ....
+2015-09-30T20:30:33.016Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1223 sent to CLIENT
+2015-09-30T20:30:33.028Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1223 send request  to SERVER
+2015-09-30T20:30:33.031Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1223, data=
+2015-09-30T20:30:33.032Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1223  : { success: true, description: 'ACK-60-1223', data: '' }  ....
+2015-09-30T20:30:33.032Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1223 sent to CLIENT
+2015-09-30T20:30:34.133Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1224 send request  to SERVER
+2015-09-30T20:30:34.137Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:34.137Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1224  : []  ....
+2015-09-30T20:30:34.138Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1224 sent to CLIENT
+2015-09-30T20:30:34.180Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1224 send request  to SERVER
+2015-09-30T20:30:34.183Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1224, data=
+2015-09-30T20:30:34.183Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1224  : { success: true, description: 'ACK-60-1224', data: '' }  ....
+2015-09-30T20:30:34.184Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1224 sent to CLIENT
+2015-09-30T20:30:35.196Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1225 send request  to SERVER
+2015-09-30T20:30:35.200Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:35.200Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1225  : []  ....
+2015-09-30T20:30:35.201Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1225 sent to CLIENT
+2015-09-30T20:30:35.211Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1225 send request  to SERVER
+2015-09-30T20:30:35.214Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1225, data=
+2015-09-30T20:30:35.214Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1225  : { success: true, description: 'ACK-60-1225', data: '' }  ....
+2015-09-30T20:30:35.215Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1225 sent to CLIENT
+2015-09-30T20:30:36.226Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1226 send request  to SERVER
+2015-09-30T20:30:36.230Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:36.230Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1226  : []  ....
+2015-09-30T20:30:36.230Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1226 sent to CLIENT
+2015-09-30T20:30:36.346Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1226 send request  to SERVER
+2015-09-30T20:30:36.349Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1226, data=
+2015-09-30T20:30:36.350Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1226  : { success: true, description: 'ACK-60-1226', data: '' }  ....
+2015-09-30T20:30:36.350Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1226 sent to CLIENT
+2015-09-30T20:30:37.376Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1227 send request  to SERVER
+2015-09-30T20:30:37.380Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:37.380Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1227  : []  ....
+2015-09-30T20:30:37.381Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1227 sent to CLIENT
+2015-09-30T20:30:37.392Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1227 send request  to SERVER
+2015-09-30T20:30:37.395Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1227, data=
+2015-09-30T20:30:37.396Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1227  : { success: true, description: 'ACK-60-1227', data: '' }  ....
+2015-09-30T20:30:37.396Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1227 sent to CLIENT
+2015-09-30T20:30:38.461Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1228 send request  to SERVER
+2015-09-30T20:30:38.464Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:38.465Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1228  : []  ....
+2015-09-30T20:30:38.465Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1228 sent to CLIENT
+2015-09-30T20:30:38.476Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1228 send request  to SERVER
+2015-09-30T20:30:38.479Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1228, data=
+2015-09-30T20:30:38.480Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1228  : { success: true, description: 'ACK-60-1228', data: '' }  ....
+2015-09-30T20:30:38.485Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1228 sent to CLIENT
+2015-09-30T20:30:39.497Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1229 send request  to SERVER
+2015-09-30T20:30:39.501Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:39.501Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1229  : []  ....
+2015-09-30T20:30:39.501Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1229 sent to CLIENT
+2015-09-30T20:30:39.514Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1229 send request  to SERVER
+2015-09-30T20:30:39.517Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1229, data=
+2015-09-30T20:30:39.518Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1229  : { success: true, description: 'ACK-60-1229', data: '' }  ....
+2015-09-30T20:30:39.518Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1229 sent to CLIENT
+2015-09-30T20:30:40.530Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1230 send request  to SERVER
+2015-09-30T20:30:40.534Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:40.534Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1230  : []  ....
+2015-09-30T20:30:40.535Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1230 sent to CLIENT
+2015-09-30T20:30:40.545Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1230 send request  to SERVER
+2015-09-30T20:30:40.548Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1230, data=
+2015-09-30T20:30:40.548Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1230  : { success: true, description: 'ACK-60-1230', data: '' }  ....
+2015-09-30T20:30:40.549Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1230 sent to CLIENT
+2015-09-30T20:30:41.561Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1231 send request  to SERVER
+2015-09-30T20:30:41.565Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:41.565Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1231  : []  ....
+2015-09-30T20:30:41.565Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1231 sent to CLIENT
+2015-09-30T20:30:41.582Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1231 send request  to SERVER
+2015-09-30T20:30:41.585Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1231, data=
+2015-09-30T20:30:41.586Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1231  : { success: true, description: 'ACK-60-1231', data: '' }  ....
+2015-09-30T20:30:41.586Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1231 sent to CLIENT
+2015-09-30T20:30:42.623Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ get_new ]#60-1232 send request  to SERVER
+2015-09-30T20:30:42.628Z - [34mdebug[39m: [MASTER] [UPDATES] Message:
+2015-09-30T20:30:42.628Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ get_new ] 60-1232  : []  ....
+2015-09-30T20:30:42.628Z - [34mdebug[39m: [MASTER] END MESSAGE [ get_new ]#60-1232 sent to CLIENT
+2015-09-30T20:30:42.640Z - [34mdebug[39m: [MASTER] [UPDATES] BEGIN MESSAGE [ ack ]#60-1232 send request  to SERVER
+2015-09-30T20:30:42.644Z - [34mdebug[39m: [MASTER] [UPDATES] Message: success=true, description=ACK-60-1232, data=
+2015-09-30T20:30:42.645Z - [34mdebug[39m: [MASTER] [UPDATES] sending [ ack ] 60-1232  : { success: true, description: 'ACK-60-1232', data: '' }  ....
+2015-09-30T20:30:42.645Z - [34mdebug[39m: [MASTER] END MESSAGE [ ack ]#60-1232 sent to CLIENT
