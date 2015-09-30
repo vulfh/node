@@ -1,0 +1,19 @@
+﻿<div class="modal fade" id="paymentDetails" role="dialog"  >
+    <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header ticket-header">
+                פרטי אמצעי תשלום
+                <div class="ticket-x" ng-click="close()"></div>
+            </div>
+            <div class="modal-body tab-content">
+              <credit-card></credit-card>
+
+
+            </div>
+            <div class="modal-footer tab-content">
+                <button class="button button-large" data-ng-click="processConfirm()">מאשר עסקה</button>
+                <button class="button button-large button-danger" data-ng-click="close()">בטל עסקה</button>
+            </div>
+        </div>
+    </div>
+</div>
