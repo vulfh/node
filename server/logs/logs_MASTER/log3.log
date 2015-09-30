@@ -1,0 +1,121 @@
+2015-09-30T20:43:00.575Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1700  for user # 60
+2015-09-30T20:43:03.571Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1701
+2015-09-30T20:43:03.572Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1701
+2015-09-30T20:43:03.572Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1701' ] ] will be sent to user  60
+2015-09-30T20:43:03.647Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1701  for user # 60
+2015-09-30T20:43:06.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1702
+2015-09-30T20:43:06.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1702
+2015-09-30T20:43:06.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1702' ] ] will be sent to user  60
+2015-09-30T20:43:06.573Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1702  for user # 60
+2015-09-30T20:43:09.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1703
+2015-09-30T20:43:09.558Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1703
+2015-09-30T20:43:09.558Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1703' ] ] will be sent to user  60
+2015-09-30T20:43:09.571Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1703  for user # 60
+2015-09-30T20:43:12.561Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1704
+2015-09-30T20:43:12.561Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1704
+2015-09-30T20:43:12.561Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1704' ] ] will be sent to user  60
+2015-09-30T20:43:12.575Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1704  for user # 60
+2015-09-30T20:43:15.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1705
+2015-09-30T20:43:15.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1705
+2015-09-30T20:43:15.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1705' ] ] will be sent to user  60
+2015-09-30T20:43:15.574Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1705  for user # 60
+2015-09-30T20:43:18.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1706
+2015-09-30T20:43:18.558Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1706
+2015-09-30T20:43:18.558Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1706' ] ] will be sent to user  60
+2015-09-30T20:43:18.633Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1706  for user # 60
+2015-09-30T20:43:21.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1707
+2015-09-30T20:43:21.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1707
+2015-09-30T20:43:21.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1707' ] ] will be sent to user  60
+2015-09-30T20:43:21.573Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1707  for user # 60
+2015-09-30T20:43:24.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1708
+2015-09-30T20:43:24.558Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1708
+2015-09-30T20:43:24.558Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1708' ] ] will be sent to user  60
+2015-09-30T20:43:24.573Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1708  for user # 60
+2015-09-30T20:43:27.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1709
+2015-09-30T20:43:27.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1709
+2015-09-30T20:43:27.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1709' ] ] will be sent to user  60
+2015-09-30T20:43:27.585Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1709  for user # 60
+2015-09-30T20:43:30.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1710
+2015-09-30T20:43:30.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1710
+2015-09-30T20:43:30.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1710' ] ] will be sent to user  60
+2015-09-30T20:43:30.574Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1710  for user # 60
+2015-09-30T20:43:33.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1711
+2015-09-30T20:43:33.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1711
+2015-09-30T20:43:33.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1711' ] ] will be sent to user  60
+2015-09-30T20:43:33.573Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1711  for user # 60
+2015-09-30T20:43:36.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1712
+2015-09-30T20:43:36.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1712
+2015-09-30T20:43:36.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1712' ] ] will be sent to user  60
+2015-09-30T20:43:36.573Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1712  for user # 60
+2015-09-30T20:43:39.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1713
+2015-09-30T20:43:39.558Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1713
+2015-09-30T20:43:39.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1713' ] ] will be sent to user  60
+2015-09-30T20:43:39.584Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1713  for user # 60
+2015-09-30T20:43:42.560Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1714
+2015-09-30T20:43:42.560Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1714
+2015-09-30T20:43:42.560Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1714' ] ] will be sent to user  60
+2015-09-30T20:43:42.613Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1714  for user # 60
+2015-09-30T20:43:45.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1715
+2015-09-30T20:43:45.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1715
+2015-09-30T20:43:45.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1715' ] ] will be sent to user  60
+2015-09-30T20:43:45.574Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1715  for user # 60
+2015-09-30T20:43:48.561Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1716
+2015-09-30T20:43:48.561Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1716
+2015-09-30T20:43:48.561Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1716' ] ] will be sent to user  60
+2015-09-30T20:43:48.575Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1716  for user # 60
+2015-09-30T20:43:51.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1717
+2015-09-30T20:43:51.558Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1717
+2015-09-30T20:43:51.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1717' ] ] will be sent to user  60
+2015-09-30T20:43:51.607Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1717  for user # 60
+2015-09-30T20:43:54.561Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1718
+2015-09-30T20:43:54.561Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1718
+2015-09-30T20:43:54.562Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1718' ] ] will be sent to user  60
+2015-09-30T20:43:54.575Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1718  for user # 60
+2015-09-30T20:43:57.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1719
+2015-09-30T20:43:57.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1719
+2015-09-30T20:43:57.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1719' ] ] will be sent to user  60
+2015-09-30T20:43:57.573Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1719  for user # 60
+2015-09-30T20:44:00.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1720
+2015-09-30T20:44:00.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1720
+2015-09-30T20:44:00.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1720' ] ] will be sent to user  60
+2015-09-30T20:44:00.573Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1720  for user # 60
+2015-09-30T20:44:03.559Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1721
+2015-09-30T20:44:03.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1721
+2015-09-30T20:44:03.560Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1721' ] ] will be sent to user  60
+2015-09-30T20:44:03.575Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1721  for user # 60
+2015-09-30T20:44:06.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1722
+2015-09-30T20:44:06.558Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1722
+2015-09-30T20:44:06.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1722' ] ] will be sent to user  60
+2015-09-30T20:44:06.584Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1722  for user # 60
+2015-09-30T20:44:09.560Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1723
+2015-09-30T20:44:09.560Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1723
+2015-09-30T20:44:09.561Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1723' ] ] will be sent to user  60
+2015-09-30T20:44:09.575Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1723  for user # 60
+2015-09-30T20:44:12.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1724
+2015-09-30T20:44:12.558Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1724
+2015-09-30T20:44:12.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1724' ] ] will be sent to user  60
+2015-09-30T20:44:12.574Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1724  for user # 60
+2015-09-30T20:44:15.561Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1725
+2015-09-30T20:44:15.561Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1725
+2015-09-30T20:44:15.561Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1725' ] ] will be sent to user  60
+2015-09-30T20:44:15.584Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1725  for user # 60
+2015-09-30T20:44:18.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1726
+2015-09-30T20:44:18.558Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1726
+2015-09-30T20:44:18.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1726' ] ] will be sent to user  60
+2015-09-30T20:44:18.572Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1726  for user # 60
+2015-09-30T20:44:21.561Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1727
+2015-09-30T20:44:21.561Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1727
+2015-09-30T20:44:21.562Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1727' ] ] will be sent to user  60
+2015-09-30T20:44:21.576Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1727  for user # 60
+2015-09-30T20:44:24.595Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1728
+2015-09-30T20:44:24.595Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1728
+2015-09-30T20:44:24.595Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1728' ] ] will be sent to user  60
+2015-09-30T20:44:24.610Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1728  for user # 60
+2015-09-30T20:44:27.561Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1729
+2015-09-30T20:44:27.561Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1729
+2015-09-30T20:44:27.561Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1729' ] ] will be sent to user  60
+2015-09-30T20:44:27.574Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1729  for user # 60
+2015-09-30T20:44:30.558Z - [34mdebug[39m: [MASTER] Try get messages for user  60  packet  60-1730
+2015-09-30T20:44:30.559Z - [34mdebug[39m: [MASTER] [NOTIFIER] No  PROVIDER messages found for user  60  packet  60-1730
+2015-09-30T20:44:30.559Z - [34mdebug[39m: [MASTER] [GET-UPDATES] Message [ [ packetId: '60-1730' ] ] will be sent to user  60
+2015-09-30T20:44:30.583Z - [34mdebug[39m: [MASTER] [NOTIFIER] BEGIN Removing message packet # 60-1730  for user # 60
