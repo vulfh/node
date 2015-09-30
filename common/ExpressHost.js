@@ -1,79 +1,141 @@
-var express =require('express');
+var express = require('express');
+var exphbs  = require('express-handlebars');
 var path = require('path');
 var http = require('http');
 var controller = require('./controller.js');
 var Request = require('./request.js');
+var Session = require('./session.js');
 var Response = require('./response.js');
 var Cache = require('./cache/cache.js');
+var Monitor = require('./sync/monitor.js');
 var url = require('url');
-
+var Cluster = require('cluster');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 function ExpressHandlerDelegate(host,ctrl,handler){
+    
+    
     return function (req, res) {
         host.controllerHandler(ctrl,req, res);
     }
+    
 }
 
-var ExpressHost = function (port) {
-    this._self = this;
+var ExpressHost = function (port,logger,cache) {
+    var _self = this;
     this.port = port;
     this.folders = [];
     this.controllers = [];
-    this.Cache = new Cache();
-    this.expressApp = express();
-    this.expressApp.use(express.bodyParser());
-    this.expressApp.use(express.json());
-    this.expressApp.use(express.urlencoded());
-    this.expressApp.use(express.cookieParser('your secret here'));
-    this.expressApp.use(express.session());
+    InitHost(logger,cache);
+    
+ function InitHost(logger,cache){
+     var hbs = exphbs.create({ /* config */ });
+    _self.requestSync = new Monitor();
+    _self.expressApp = express();
+   
+   // _self.expressApp.use(express.urlencoded());
+    //_self.expressApp.set('views',__dirname+'../webapp/views');
+    
+    
 
-    this.start = function (port) {
+  _self.expressApp.use(session({ resave: true, saveUninitialized: true, 
+                      secret: 'uwotm8' }));
+
+    // parse application/json
+    _self.expressApp.use(bodyParser.json());                        
+
+    // parse application/x-www-form-urlencoded
+    _self.expressApp.use(bodyParser.urlencoded({ extended: true }));
+    _self.expressApp.use(cookieParser());
+
+
+
+    _self.expressApp.engine('handlebars', exphbs({defaultLayout: 'main'}));
+    _self.expressApp.set('view engine', 'handlebars');
+    _self.expressApp.use(function (error, req, res, next) {
+	if (!error) {
+	  next();
+	} else {
+	    console.error(error.stack);
+	    res.send(500);
+	}
+      });
+    _self.Cache = cache;
+    _self.Logger=logger;
+    _self.start = function (port) {
         if (port !== undefined && port != null)
-            this.port = port;
-        for (var i = 0; i < this.folders.length; i++) {
-            this.expressApp.use(express.static(this.folders[i]));
+            _self.port = port;
+        for (var i = 0; i < _self.folders.length; i++) {
+            _self.expressApp.use(express.static(this.folders[i]));
         }
-        this.expressApp.listen(this.port);
+        _self.expressApp.listen(_self.port);
         //start listen to dynamic urls
-        this.startListen();
+        _self.startListen();
     }
+    _self.startClustered = function(port){
+	if (Cluster.isMaster) {
+	    var cpuCounter = require('os').cpus().length;
+	    for(var i=0;i<cpuCounter;i++){
+		Cluster.fork();
+	    }
+	}
+	else{
+	    _self.start(port);
+	}
+    }
+    var responseCounter = 0;
+    
+    _self.controllerHandler = function (controller, req, res) {
+				 var urlParts = url.parse(req.url, true, true);
+						var query = urlParts.query;
+						var pathName = urlParts.pathname.toUpperCase();
+						// console.log(query);
+						//console.log(pathName);
+						
+						var request = new Request(query, req.body, controller.Cache,req.cookies);
+						var session = new Session(controller.Cache,null,request);
+						session.init(function(){
+								request.Session=session;
+								request.release = function (){
+								    }
+								var response = new Response(res,session);
+								response.id = responseCounter++;
+								// console.log(req);
+								controller.handler(request, response);
+						    });
+						
+	}
+}   
+    
 }
 ////////PROTOTYPE//////////////////////////////////////////////////////////
 ExpressHost.prototype.addFolder =  function(folderName){
 		this.folders.push(path.join(path.join(__dirname,'..'),folderName));
 	}
 /////////////////////////////////////////////////////////////////////////////
-	ExpressHost.prototype.setControllers = function (controllers, errHandler) {
+ExpressHost.prototype.setControllers = function (controllers, errHandler) {
 	    if (controllers !== null && controllers !== undefined) {
 	        this.controllers = controllers;
 
 	    }
 	}
 ////////////////////////////////////////////////////////////////////////
-	ExpressHost.prototype.controllerHandler = function (controller, req, res) {
-	    var urlParts = url.parse(req.url, true, true);
-	    var query = urlParts.query;
-	    var pathName = urlParts.pathname.toUpperCase();
-	    // console.log(query);
-	    //console.log(pathName);
-	    var request = new Request(query, req.body, req.session, controller.Cache);
-	    var response = new Response(res);
-	    // console.log(req);
-	    controller.handler(request, response);
-	}
+
 ////////////////////////////////////////////////////////////////////////
-	ExpressHost.prototype.startListen = function () {
-	    console.log('start listen ...');
+ExpressHost.prototype.startListen = function () {
+	    this.Logger.info('start listen ...');
 	    for (var i = 0; i < this.controllers.length; i++) {
 	        var ctrl = this.controllers[i];
 	        ctrl.Cache = this.Cache;
-	        console.log('listening %s on %s', ctrl.protocol, ctrl.path);
+	        this.Logger.info('listening ',ctrl.protocol,' on ',  ctrl.path);
 	        this.attachController(ctrl);
 	    }
 	}
 ////////////////////////////////////////////////////////////////////////////////////////
-    ExpressHost.prototype.attachController = function(ctrl){
-        var delegate = new ExpressHandlerDelegate(this, ctrl, this.controllerHandler);
-         switch (ctrl.protocol) {
+ExpressHost.prototype.attachControllerByProtocol = function(ctrl,protocol){
+    var delegate = new ExpressHandlerDelegate(this, ctrl, this.controllerHandler);
+         switch (protocol) {
 	            case 'GET':
                  this.expressApp.get(ctrl.path, delegate);
 	                break;
@@ -81,7 +143,20 @@ ExpressHost.prototype.addFolder =  function(folderName){
                  this.expressApp.post(ctrl.path, delegate);
 	                break;
 	        }
+}
+////////////////////////////////////////////////////////////////////////////////////////
+ExpressHost.prototype.attachController = function(ctrl){
+        if (Array.isArray(ctrl.protocol)) {
+	    var self = this;
+	   ctrl.protocol.every(function(value){
+		self.attachControllerByProtocol(ctrl,value);
+		return true;
+	    });
+	}
+	else{
+	   this.attachControllerByProtocol(ctrl,ctrl.protocol); 
+	}
 
-    }
+}
 //////////////////////////////////////////////////////////////////
 module.exports = ExpressHost;

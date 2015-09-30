@@ -8,28 +8,39 @@ HttpProxy.Post = function (host, port, path, data, err, callback) {
         path: path,
         port: port,
         headers: { 'Content-Type': 'application/json',
-            'Content-Length': js.length
+            'Content-Length': Buffer.byteLength(js)
         },
         method: 'POST'
     };
-    var req = http.request(options, function onResponse(response) {
-        var responseStr = '';
-        response.on('data', function (chunk) {
-            responseStr += chunk;
+    try{
+        var req = http.request(options, function onResponse(response) {
+            var responseStr = '';
+            response.on('data', function (chunk) {
+                responseStr += chunk;
+            });
+            response.on('end', function () {
+                try {
+                    var responseObj;
+                    if (typeof (responseStr) === 'string') {
+                        responseObj = JSON.parse(responseStr);
+                    }
+                    else if (typeof (responseStr) === 'object') {
+                        responseObj = responseStr;
+                    }
+                    callback(responseObj);
+                }
+                catch (error) {
+                    err('Failed to convert [' + responseStr + '] to object !');
+                }
+            });
         });
-        response.on('end', function () {
-            try {
-                var responseObj = JSON.parse(responseStr);
-                callback(responseObj);
-            }
-            catch (error) {
-                err('Failed to convert [' + responseStr + '] to object !');
-            }
-        });
-    });
-
-    req.write(js);
-    req.end();
+    
+        req.write(js);
+        req.end();
+    }
+    catch(e){
+        console.log('ERROR:'+path+'||'+data+' description:'+e.toString());         
+    }
 }
 
 HttpProxy.Get = function (host, port, path, data, err, callback) {
@@ -39,21 +50,32 @@ HttpProxy.Get = function (host, port, path, data, err, callback) {
         path: path + '?' + data
     };
     var responseStr = '';
-    var req = http.request(options, function onCallback(response) {
-        response.on('data', function (chunk) {
-            responseStr += chunk;
+    try{
+        var req = http.request(options, function onCallback(response) {
+            response.on('data', function (chunk) {
+                responseStr += chunk;
+            });
+            response.on('end', function () {
+                try {
+                    var responseObj;
+                    if (typeof (responseStr) === 'string') {
+                        responseObj = JSON.parse(responseStr);
+                    }
+                    else if (typeof (responseStr) === 'object') {
+                        responseObj = responseStr;
+                    }
+                    callback(responseObj);
+                }
+                catch (error) {
+                    err('Failed to convert [' + responseStr + '] to object !');
+                }
+            });
         });
-        response.on('end', function () {
-            try {
-                var responseObj = JSON.parse(responseStr);
-                callback(responseObj);
-            }
-            catch (error) {
-                err('Failed to convert [' + responseStr + '] to object !');
-            }
-        });
-    });
-    req.end();
+        req.end();
+    }
+    catch(e){
+        console.log('ERROR:'+path+'?'+data+' description:'+e.toString());     
+    }
 }
 
 module.exports = HttpProxy;
