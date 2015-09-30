@@ -1,0 +1,16 @@
+<div id="tosPopup" class="modal fade" role="dialog" data-ng-controller="signTosController" >
+    <div class="modal-dialog">
+                    <div class="modal-content" style="text-align: center;">
+                        <div class="modal-header ">
+                            
+                        </div>
+                               
+                        <div class="modal-body tab-content" style="{{windowStyle()}}" >
+                            <ng-include src="tos"></ng-include>
+                        </div>
+                        <div class="modal-footer " style="text-align:center">
+                            <button class="button button-large" data-ng-click="sign()">מסכים עם התנאי שירות</button>
+                        </div>
+                    </div>
+    </div>
+</div>

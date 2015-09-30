@@ -1,61 +1,56 @@
-﻿<div class ="innerPage">
-    <h1>לתת הצעת מחיר</h1>
-    <section>
-            <fieldset>
-                <legend>פרטי המשלוח</legend>
-                <label>סוג המשלוח</label>
-                <span>מעטפע</span>
-                <label>משקל</label>
-                <span>.5 ק''ג</span>
-                
-            </fieldset>
-     </section>
-      <section>
-        <fieldset>
-            <legend>כתובת וזמן אסיפה</legend>
-            <label>עיר</label>
-            <span>
-                    תל-אביב
-                </span>
-               
-            <label>רחוב ומספר הבית</label>
-            <span> אלנבי 38</span>
-            <label>תאריך אסיפה</label>
-            <span>26-01-2014 </span>
-            <label>שעת אסיפה</label>
-            <span>12:50 - 14:50</span>
-            <br />
-            <label>הערות</label>
-           <span>לקרוא לשי</span>
-        </fieldset>
-        <fieldset>
-           <legend>כתובת וזמן אסיפה</legend>
-            <label>עיר</label>
-            <span>
-                   חולון
-                </span>
-               
-            <label>רחוב ומספר הבית</label>
-            <span> פינסקר 2</span>
-            <label>תאריך אסיפה</label>
-            <span>27-01-2014 </span>
-            <label>שעת אסיפה</label>
-            <span>8:50 - 10:50</span>
-            <br />
-            <label>הערות</label>
-           <span>למסור ליניב</span>
-        </fieldset>
+<div style="width:100%;position: relative;top:-2px;" ng-controller="sessions">
+   <div class="caption " style="width:100%; padding-top:100px;vertical-align:middle;text-align:center;" ng-if="Sessions.length==0">
+       אין בקשות שליחה כעת.
+   </div>
+    <nav class="nav" role="navigation"  style="padding-top:5px">
+        <div class="navbar-collapse"  style="direction:rtl;float:right;height:50px;">
+            <ul class="sub-menu" id="sesionsMenu">
+                <li  ng-class="isActive(s.Id)" ng-repeat="s in Sessions">
+                    <a id="tab{{s.Id}}" class="caption"  href="#interest" data-toggle="tab" ng-click="switchTab(s.Id)">  בקשה {{s.Id}} </a></li>
+            </ul>
+        </div>
+    </nav>
+     <div style="width:100%" ng-show="Sessions.length>0">
+                                 <div style="width:100%" class="tab-content-separator"></div>
+       </div>
+     
+     
+     
+     <div style="width:100%;text-align: center; margin-top:0px">
+        <div  class="tab-content centered" style="text-align:center;padding-bottom:20px;" ng-repeat="s in Sessions" on-repeat-finished-directive="sessionsRenderFinished()" id="sessionDefinition{{s.Id}}">
+                       <request-details request="s"></request-details>
+                                <div id="divPrice" class="stage-1 centered request-summary" style="padding-top:30px;padding-right:0px;">
+                                    <table style="width:100%">
+                                             <tr>
+                                                 <td class="summary-margin">
+                                                     &nbsp;
+                                                 </td>
+                                                 <td align="right">
+                                                     <span class="caption">הצעת מחיר</span>
+                                                     <input type="text" ng-model="s.price" ng-change="isNumericInput(s,'price')"/>
+                                                 </td>
+                                             </tr>
+                                             <tr >
+                                                <td style="" class="summary-margin"></td>
+                                                <td style="padding-left:20px;padding-top:20px">
+                                                     <textarea  class="form-control" ng-model="s.priceRemark" placeholder="הערות"></textarea>
+                                                    
+                                                </td>
+                                                
+                                             </tr>
+                                             <tr style="">
+                                                <td style="margin-top:20px;" class="summary-margin"></td>
+                                                <td align="left" style="padding-top: 20px;padding-left:20px;padding-bottom:20px">
+                                                    <button class="button button-large" id="btnGivePrice{{s.Id}}" ng-click="SendPrice(s.Id)">שלח </button>
+                                                    <button class="button-large button-danger" id = "btnRejectSession{{s.Id}}" data-ng-click="RejectSession(s.Id)">דחה את הבקשה</button>
+                                                </td>
+                                             </tr>
+                                     </table>
+                                            
+                                </div>
+       </div>
+        
+     </div>
 
-    </section>
- </div>
-<div>
-    <section>
-        <fieldset>
-           <legend>הצעת מחיר</legend>
-            <label>מחיר</label>
-            <input type="text" />
-            <button class="btn btn-primary">שלח </button>
-        </fieldset>
-    </section>
-
-</div>
+        </div>
+          

@@ -1,0 +1,42 @@
+<div class="innerPage" ng-controller="archive">
+   <div style="width:100%;text-align: center;padding-top:10px;">
+        <div class="form-inline">
+             <div class="form-group centered">
+                <label class="control-label">מתאריך</label>
+                <input class= "archive-form-control"id ="arcFromDate" ng-model="fromDate" type="text" readonly="yes"/>
+            </div>
+             <div class="form-group">
+                 <label class="control-label">עד תאריך</label>
+                <input class= "archive-form-control" id ="arcToDate" ng-model="toDate" type="text" readonly="yes"/>
+            </div>
+              <div class="form-group">
+                 <label class="control-label">סוג</label>
+                <select class="form-control archive-form-control " ng-options="origin.name for origin in origins " ng-model="selectedOrigin"></select>
+                
+            </div>
+               <div class="form-group">
+                <button class="archive-search" ng-click="navigate(1)"></button>
+            </div>
+             
+        </div>
+   </div>   
+   
+    
+   
+    <div style="width:100%;margin-top:10px;" class="tab-content-separator"></div>
+    <div style="clear:both"></div>
+    <div class="table-responsive tab-content" >
+        <br/>
+        <div  style="width:100%;text-align:center;">
+            <div style="display: table;width:60%" class="centered">
+                <deal-details-sender ng-repeat="dealRow in pageData" deal="dealRow" ng-if="isSender(dealRow)"></deal-details-sender>
+                <deal-details-provider ng-repeat="dealRow in pageData" onupdate="onupdate" deal="dealRow" statuses = "deliveryStatuses" ng-if="!isSender(dealRow)"></deal-details-provider
+            </div>
+        </div>
+       <div style="width:100%;text-align: center">
+            <ul class="pagination">
+                <li ng-repeat="pageId in pages" ng-class="isActivePageId(pageId)" ng-click="navigate(pageId)"><a href="#">{{pageId}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

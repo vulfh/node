@@ -1,61 +1,100 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
-   
-    <title>Shipping</title>
+    <title>מרוץ שליחים</title>
      <link rel="stylesheet" href="styles/bootstrap/css/bootstrap.min.css" />
+     <!--link href="styles/bootstrap/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" /-->
      <link rel="stylesheet" href="styles/styles.css" />
-    <style type="text/css">
-        body {
-            direction: rtl;
-        }
-
-        li
-        {
-            float: right;
-        }
-      
-        .menuActive
-        {
-          
-        }
-        div.innerPage
-        {
-            margin-right:10px;
-        }
-        label
-        {
-            margin-right:10px;
-        }
-        input[type="text"].number
-        {
-            width:30px;
-        }
-        input[type="number"].number
-        {
-            width:50px;
-        }
-    </style>
-
+     <link rel="stylesheet" href="styles/ticket.css" />
+     <link rel="stylesheet" href="styles/request.css" />
+     <link rel="stylesheet" href="styles/archive.css" />
+     <link rel="stylesheet" href="styles/jquery-ui.css"/>
+     <link rel="stylesheet" href="styles/jquery.timepicker.css"/>
+     
+     <meta http-equiv="cache-control" content="max-age=0" />
+     <meta http-equiv="cache-control" content="no-cache" />
+     <meta http-equiv="expires" content="0" />
+     <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+     <meta http-equiv="pragma" content="no-cache" />
+     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 </head>
 <body>
-    <div ng-app="mockup" ng-controller="mainController">
-            <ng-include src="topMenu"></ng-include>
-            
-            <div style="clear:both"></div>
-            <div >
-                <div style="width:100%" >
-                    <ng-include src="template"></ng-include>
+        
+        <div ng-app="mockup" ng-controller="mainController" class=" ng-cloak container" ng-cloak >
+            <ng-include src="ticket" onload="loaded()"></ng-include>
+            <div class="row">
+                <div  class="col-sm-12 background-top ng-cloak" style="padding-top:5px" ng-cloak>
+                     <div id="userInfo" class="col-sm-5 ng-cloak" ng-cloak>
+                        <ng-include src ="userInfo"></ng-include>
+                    </div>
+                    <div  id = "logo" class="col-sm-offset-4 col-sm-3" style="background-image:url(images/logo.png);width:143px;height:52px"></div>
                 </div>
             </div>
-    </div>
+            <div class="row">
+                <ng-include src="topMenu"></ng-include>
+            </div>    
+            <div class="row">
+                    <ng-include src="template"></ng-include>
+            </div>
+        </div>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script-->
+  
+    <script src="scripts/lib/moment-with-langs.js" type="text/javascript"></script>
+    <script src="scripts/lib/angular.js" type="text/javascript"></script>
+    <script src="scripts/lib/jquery.1.10.min.js"></script>
+    <script src="scripts/lib/jquery-ui.min.js" type = "text/javascript"></script>
+    <script src="scripts/lib/jquery.timepicker.min.js"></script>
+     <script src="styles/bootstrap/js/bootstrap.min.js"></script>
+     <script src ="scripts/lib/bootbox.min.js"></script>
+
+	<script src="scripts/lib/datepicker-he.js?"></script>
+     <script src="scripts/lib/moment-with-langs.js"></script>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+     
+     
+      <script src="common?type=get_constants" type="text/javascript"></script>
+    <script src="scripts/utils.js" type="text/javascript"></script>
+    <script src ="scripts/app.js" type="text/javascript"></script>
+     
+    <script src ="scripts/dialogService.js" type="text/javascript"></script>
+  <script src ="scripts/sharedService.js" type="text/javascript"></script>
+   
+    <script src ="scripts/communication.js" type="text/javascript"></script>
+   
+     
+    <script src ="scripts/ngmsd.js" type="text/javascript"></script>
+   
+     <script src='scripts/mainController.js' type = "text/javascript"></script>
+    <script src ="scripts/ticket/extradetailsdirective.js" type="text/javascript"></script>
+    <script src ="scripts/ticket/ticket.js" type="text/javascript"></script>
+    <script src="scripts/askforsending/constraintsservce.js" type="text/javascript"></script> 
+    <script src ="scripts/askforsending/topindicatordirective.js" type="text/javascript"></script>
+    <script src="scripts/askforsending/constraintdirective.js" type="text/javascript"></script>
+    <script src ="scripts/askforsending/askforsending.js" type="text/javascript"></script>
+    
+    <script src="scripts/giveprice/giveprice.js" type="text/javascript"></script>
+    <script src ="scripts/giveprice/requestdetailsdirective.js" type="text/javascript"></script>
+    
+    <script src ="scripts/subscription/subscriptionService.js?" type="text/javascript"></script>
+    <script src ="scripts/subscription/subscriptionController.js" type="text/javascript"></script>
     <script src="scripts/packages.js" type="text/javascript" ></script>
+    <script src='scripts/session.js' type = "text/javascript"></script>
+    <script src='scripts/login.js' type = "text/javascript"></script>
+    <script src='scripts/archive/dealdetailsdirective.js' type="text/javascript"></script>
+    <script src='scripts/archive/archiveservice.js' type = "text/javascript"></script>
+    <script src='scripts/archive/archive.js' type = "text/javascript"></script>
+   
+    <script src ="scripts/interest.js" type="text/javascript"></script>
+     <script src ="scripts/tos/signTosController.js" type="text/javascript"></script>
+     <script src ="scripts/tos/signTosService.js" type="text/javascript"></script>
+
+    <script src="scripts/myaccount/creditcarddirective.js" type="text/javascript"></script>
+    <script src="scripts/myaccount/paymentdirective.js" type="text/javascript"></script>
+    <script src="scripts/generaldirectives/requiredmarkdirective.js"></script>
     <script type="text/javascript">
         var user = undefined;
+         moment.locale('he');
+
         TimeFrameOfInterest = function () {
             // this.self = this;
             this.day = '';
@@ -63,57 +102,16 @@
             this.endTime = '';
         }
 
-        RequestForShipping = function (rName, rId) {
-            this.name = rName;
-            this.id = rId;
-            this.packageCounter = 0;
-            this.packageDefinitions = [new PackageDefinition(this.id + "afs", this.packageCounter++)];
-            this.packageDefinitions[0].SetIndex(0);
-            this.pickUpDate = (new Date()).toDateString();
-            this.addPackage = function () {
-                var pd = new PackageDefinition(this.id + "afs", this.packageCounter++);
-                pd.SetIndex(this.packageDefinitions.length);
-                this.packageDefinitions.push(pd);
-            }
-        }
-
-        var app = angular.module('mockup', []);
-        //////SERVICES/////////////////////////////////////////////////
-        sharedSvc = function () {
-            var user = undefined;
-            this.onLogin = function () { };
-            this.processLoginResponse = function (data, shared, handler) {
-                if (data.success) {
-                    shared.menu = data.menu;
-                    shared.user = data.user;
-                    shared.onLogin();
-
-                }
-                if (handler !== undefined) {
-                    handler(data);
-                }
-
-            }
-        }
-        app.factory('shared', [function () {
-            return new sharedSvc();
-        } ]);
-        ///////DIRECTIVES///////////////////////////////////////////////
-        app.directive('onRepeatFinishedDirective', function ($timeout) {
-            return function (scope, element, attrs) {
-                if (scope.$last) {
-                    var callBack = 'scope.' + attrs.onRepeatFinishedDirective;
-                    $timeout(function () {
-                        eval(callBack);
-                    });
-                }
-            };
-        })
+       app.run(function($templateCache){
+            $templateCache.put('controls/ticket.html');
+        });
         //////CONTROLLERS//////////////////////////////////////////////
+        
+       
         app.controller('topMenuController', ['$scope', '$http', 'shared', function ($scope, $http, shared) {
             $scope.menu = shared.menu;
             $scope.setup = function () {
-                $scope.userName = shared.user.userName;
+               shared.setUserInfo();
                 if ($scope.menu.menu[$scope.menu.defaultPageId] !== undefined) {
                     shared.switchPage($scope.menu.defaultPageId);
                 }
@@ -127,154 +125,19 @@
             $scope.switchPage = function (id) {
                 shared.switchPage(id);
             }
+           
         } ]);
-        app.controller('loginController', ['$scope', '$http', 'shared', function ($scope, $http, shared) {
-            $scope.login = function () {
-                var userName = $('#txtUserName').val();
-                var password = $('#txtPassword').val();
-                $http.post('/auth', { userName: userName, password: password }).
-                        success(function (data, status, headers, config) {
-                            shared.processLoginResponse(data, shared, function (data) {
-                                if (data.success !== true) {
-                                    alert(data.description);
-                                }
-                            });
-                        }).
-                        error(function (data, status, headers, config) {
-                            alert('error');
-                        });
-            };
-        } ]);
+	app.controller('viewTosController',['$scope',function($scope){
+	    $scope.tos = './controls/tos.html';
+		
+	    }]);
+        
 
-        angular.module("mockup").controller('mainController', ['$scope', '$http', 'shared', function ($scope, $http, shared) {
-
-            $http.post('/auth')
-            .success(function (data, status, headers, config) {
-                shared.processLoginResponse(data, shared, function (data) {
-                    if (data.success !== true) {
-                        $scope.topMenu = "./controls/login.html?" + Math.random();
-                    }
-                });
-            })
-            .error(function (data, status, headers, config) {
-
-            });
-
-
-            shared.switchPage = function (id) {
-                $("li").removeClass("active");
-                var liId = "#topMenuItem" + id;
-                var li = $(liId);
-                li.addClass("active");
-                if (shared.menu.menu[id].Link !== '') {
-                    $scope.template = shared.menu.menu[id].Link + '?' + Math.random();
-                }
-                else {
-                    $scope.template = "";
-                }
-            }
-            shared.onLogin = function () {
-                $scope.topMenu = './controls/topmenu.html?' + Math.random();
-            }
-        } ]);
-        angular.module("mockup").controller("interestDayAndTimeFrameController", ['$scope', function ($scope) {
-            $scope.daysOfInterest = [];
-            $scope.daysOfInterest.push(new TimeFrameOfInterest());
-            $scope.addDay = function () {
-                $scope.daysOfInterest.push(new TimeFrameOfInterest());
-            }
-        } ]);
-        ///AskForSending Controller
-        angular.module("mockup").controller("askForSendingController", ['$scope', '$http', 'shared', function ($scope, $http, shared) {
-            $scope.requests = [new RequestForShipping("בקשה 1", "request0")];
-            $scope.tabs = [$scope.requests[0]];
-
-            $scope.hideAllTabs = function () {
-                for (var i = 0; i < $scope.requests.length; i++) {
-                    $("#" + $scope.requests[i].id).css("display", "none");
-                }
-            }
-            $scope.showTab = function (reqId) {
-                var req = $scope.getRequestById(reqId);
-                $("#" + req.id).css("display", "block");
-            }
-            $scope.getRequestById = function (reqId) {
-                for (var i = 0; i < $scope.requests.length; i++) {
-                    if ($scope.requests[i].id === reqId) {
-                        return $scope.requests[i];
-                    }
-                }
-            }
-            $scope.removePackage = function (reqId, index) {
-
-                var req = $scope.getRequestById(reqId);
-                req.packageDefinitions.splice(index, 1);
-            }
-            $scope.sendRequest = function (id) {
-                var req = $scope.getRequestById(id);
-                $http.post('/afs', { request: req, user: shared.user })
-                .success(function (data, status, headers, config) {
-                    $("#" + id + " :input").prop("disabled", true);
-                })
-                .error(function (data, status, headers, config) { });
-                /*    $.each(inp, function ( idx,e) {
-                debugger;
-                e.prop("disabled", true);
-                });*/
-            }
-            $scope.addRequest = function () {
-                var req = new RequestForShipping("בקשה " + ($scope.requests.length + 1), "request" + $scope.requests.length);
-                $scope.requests.push(req);
-                $scope.tabs.unshift(req);
-                this.hideAllTabs();
-                this.showTab(req.id);
-                $scope.switchTab("tab" + req.id, req.id);
-            }
-            $scope.switchTab = function (liId, tabId) {
-                $("ul[id='requestsMenu'] > li").removeClass("active");
-                var li = $("#" + liId);
-                li.addClass("active");
-                $scope.hideAllTabs();
-                $scope.showTab(tabId);
-            }
-            $scope.switchTab("tab" + $scope.requests[0].id, $scope.requests[0].id);
-
-        } ]);
-
-        angular.module("mockup").controller("defineInterestController", ['$scope', function ($scope) {
-            $scope.packageCounter = 0;
-            $scope.name = "";
-            $scope.packageDefinitions = [new PackageDefinition("di", $scope.packageCounter++)];
-            $scope.packageDefinitions[0].SetIndex(0);
-            $scope.addPackage = function () {
-                var pd = new PackageDefinition("di", $scope.packageCounter++);
-                pd.SetIndex($scope.packageDefinitions.length);
-                $scope.packageDefinitions.push(pd);
-            }
-            $scope.areas = [{ key: 1, value: 'חיפה והסביבה' },
-                                    { key: 2, value: 'ירושלים' },
-                                    { key: 3, value: 'תל אביב הגדולה' },
-                                    { key: 4, value: 'באר שבע והסביבה' },
-                                    { key: 5, value: 'אילת' },
-                                    { key: 6, value: 'נהריה' },
-                                    { key: 7, value: 'קרית גת'}];
-        } ]);
-
-
-        angular.module("mockup").directive('dateFix', function () {
-            return {
-                restrict: 'A',
-                require: 'ngModel',
-                link: function (scope, element, attr, ngModel) {
-                    element.on('change', function () {
-                        scope.$apply(function () {
-                            ngModel.$setViewValue(element.val());
-                        });
-                    });
-                }
-            };
-        });
+        
+       
     </script>
+    
+
 </body>
 </html>
 

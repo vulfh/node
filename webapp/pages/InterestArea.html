@@ -1,0 +1,24 @@
+<div class="innerPage" ng-controller="interestListController">
+     <h1>
+          תחום התעניינות כשליח
+     </h1>
+      
+                <div   style="direction:rtl;">
+                    <button class="btn btn-primary" ng-click="addNewInterest()">הוסף תחום חדש</button>
+                    <table class="table">
+                         <tbody>
+                              <tr ng-repeat="item in items">
+                                   <td>{{item.id}}</td>
+                                   <td>
+                                     <a id="areaOfInterest" href="#interest" data-toggle="tab" ng-click="addNewInterest(item.id)">{{item.name}}</a>   
+                                   </td>
+                                   <td><button class="btn btn-primary" ng-click="addNewInterest(item.id)">ערוך</button>
+                                       <button class="btn btn-danger" ng-click="deleteItem(item.id)">מחק</button>     
+                                   </td>
+                                   
+                              </tr>
+                         </tbody>
+                    </table>
+                </div>
+            
+</div>

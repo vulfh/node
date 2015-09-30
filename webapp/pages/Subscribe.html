@@ -1,0 +1,112 @@
+<div class="innerPage" ng-controller="subscriptionController" style="width:50%">
+     <h1>
+         הרשמה
+     </h1>
+     <table class="table">
+        
+        <tbody>
+            <tr>
+                <td>
+                    <span class="highlight">
+                    שם משתמש
+                    </span>
+                </td>
+            
+                <td>
+                    <input type="text" class="form-control" ng-model="userName" ng-blur="checkUserName()"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="highlight">
+                    ססמה:
+                    </span>
+                </td>
+            
+                <td>
+                    <input type="password" class="form-control" ng-model="password" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="highlight">
+                    חזור על הססמה:
+                    </span>
+                </td>
+            
+                <td>
+                    <input type="password" class="form-control" ng-model="repeatedPassword" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="highlight">
+                    שם פרטי
+                    </span>
+                </td>
+                <td>
+                    <input type ="text" class="form-control" ng-model="firstName"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="highlight">
+                    שם משפחה
+                    </span>
+                </td>
+                <td>
+                    <input type="text" class="form-control" ng-model ="lastName"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="highlight">
+                    דואר אלקטרוני
+                    </span>
+                </td>
+                <td>
+                    <input type="text" class="form-control" ng-blur="checkEmail()" ng-model="email"/>
+                </td>
+            </tr>
+            <tr>
+               <td>
+                   <span class="highlight">
+                    מס' טלפון נייח
+                    </span> 
+               </td>
+               <td>
+                     <input type="text" ng-model = "phone1"/>-
+                    <select ng-model="phone1Prefix" ng-options="p.desc for p in prefix1">
+                         
+                    </select> 
+                   
+               </td>
+                
+            </tr>
+            <tr>
+               <td>
+                   <span class="highlight">
+                   מס' טלפון נייד
+                    </span> 
+               </td>
+               <td>
+                     <input type="text" ng-model = "phone2"/>-
+                    <select ng-model="phone2Prefix" ng-options="p.desc for p in prefix2">
+                         
+                    </select> 
+                   
+               </td>
+            </tr>
+        </tbody>
+     </table>
+     <div>
+        <p>
+            ברצוני להרשם כ:
+        </p>
+            <input type="checkbox" class="checkbox-inline" value="option1" ng-model="isProvider"/><span class="highlight"> שליח </span>
+            <input type="checkbox" class="checkbox-inline"  value="option1" ng-model="isSender"/> <span class="highlight"> שולח </span>
+     </div>
+     <div style="width:100%;text-align: center">
+        <button class="btn btn-primary btn-lg" ng-click="saveUser()">הרשם</button>
+    </div>
+</div>

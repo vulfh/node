@@ -1,137 +1,567 @@
-﻿<div class ="innerPage" ng-controller="askForSendingController">
-       <div style="margin-top:5px">
-                            <button class="btn btn-primary" ng-click="addRequest()">בקשה חדשה</button>
-                    </div><nav class="navbar navbar-default" role="navigation">
-                <div class="collapse navbar-collapse"  style="direction:rtl;float:right">
-                    <ul class="nav navbar-nav" id="requestsMenu">
-                        <li id="tab{{rfsTab.id}}" ng-repeat="rfsTab in tabs"><a id="areaOfInterest" href="#interest" data-toggle="tab" ng-click="switchTab('tab'+rfsTab.id,rfsTab.id)">{{rfsTab.name}}</a></li>
+﻿<div style="width:100%;position:relative;top:-2px;" ng-controller="askForSendingController">
+       
+       <nav class="nav" role="navigation" style="padding-top:5px">
+                <div class="navbar-collapse"  style="direction:rtl;float:right">
+                      <div style="margin-top:15px;float:right">
+                            <button class="button button-small" ng-click="addRequest()">בקשה חדשה</button>
+                     </div>
+                    <ul class="sub-menu"  id="requestsMenu">
+                        <li ng-repeat="rfsTab in tabs" on-repeat-finished-directive="init()">
+                            <a id="tab{{rfsTab.id}}" class="caption" ng-click="switchTab('tab'+rfsTab.id,rfsTab.id)">{{rfsTab.name}}</a>
+                        </li>
                     </ul>
                 </div>
-            </nav>
-    <div ng-repeat="rfs in requests">
-            
-      
-        <div id="{{rfs.id}}">
-                <h1>{{rfs.name}} למשלוח</h1>
-                <div>
-       
-                        <fieldset>
-                                <legend>פרטי המשלוח</legend>
-                                <input type="button" class="btn" value="הוסף משלוח" ng-click="rfs.addPackage()"/>
-                                <div ng-repeat="p in rfs.packageDefinitions">
-                                    <label>סוג המשלוח</label>
+       </nav>
+       <div style="width:100%">
+                                 <div style="width:100%" class="tab-content-separator"></div>
+       </div> 
+    <div  id="{{rfs.id}}" ng-repeat="rfs in requests" on-repeat-finished-directive = "setupCalendars('{{rfs.id}}')" class="tab-content col-sm-12 ">
+        <payment confirm="confirmDeal(rfs.id)" cancel="cancelDeal(rfs.id)"></payment>
+        <div id="{{rfs.id}}_container" class="col-sm-12 container">
+             
+                <div data-stage="1" class="row">
+                     <shipping-top-indicator stage="1"></shipping-top-indicator>
+                       
+                       <div class="col-sm-12 container">
+                            <fieldset>
+                                    <!--input type="button" class="btn" value="הוסף משלוח" ng-click="rfs.addPackage()"/-->
+                                    <div class="row col-sm-12 container" ng-repeat="p in rfs.packageDefinitions" on-repeat-finished-directive="changeInsuranseState('{{rfs.id}}')">
+                                          <div style="width:100%;height:10px;margin-top:15px;margin-bottom:15px;" class="plus-package-background" ng-show="showSeparator(rfs,p.Counter)"></div>
+                                          <div style="width:100%;text-align: center">
+                                                 <table align="center" class="stage-1" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                                <td rowspan="2" class="ask-for-sending-form-icon" vallign="bottom">
+                                                                           <div style="">
+                                                                               <img src="images/package-icon.png" style="width:61px;height:35px"/>
+                                                                           </div>
+                                                               </td>
+                                                               <td style="text-align: right">
+                                                                      <span class="caption" style="text-align: center;">
+                                                                             פרטי המשלוח
+                                                                      </span>
+                                                               </td>
+                                                            <td>
+                                                                <span class="caption" style="text-align: center;">
+                                                                   כמות
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+
+                                                            <td style="width:70%">
+                                                                <div class="form-group">
+                                                                    <select class="form-control" ng-options="pac.Name for pac in p.Packages" ng-model="p.PackageType" ng-change="packageTypeChanged(p,rfs.id)"></select>
+
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <input style="height:30px;" type="number" ng-change="isNumericInput(p,'Amount')" ng-focus="isNumericInput(p,'Amount')" ng-model="p.Amount" class="number" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                 </table>
+                                          </div>
+                                          <div style="width:100%;text-align: center">
+                                                 <table class="stage-1" align="center" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                              <td rowspan="2" class="ask-for-sending-form-icon" vallign="bottom">
+                                                                           <div style="">
+                                                                               <img src="images/size-icon.png" style="width:61px;height:35px"/>
+                                                                           </div>
+                                                               </td>
+                                                              <td style="text-align: right">
+                                                                      <span class="caption"  ng-hide="disableWeightField(p)">משקל</span>
+                                                              </td>
+                                                              <td style="text-align: right">
+                                                                      <span class="caption">אורך</span>
+                                                              </td>
+                                                              <td style="text-align: right">
+                                                                      <span class="caption">רוחב</span>
+                                                              </td>
+                                                              <td style="text-align: right">
+                                                                      <span class="caption">גובה</span>
+                                                              </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: right">
+                                                               
+                                                                     <input   ng-hide="disableWeightField(p)"  style="width:80%" type="number" ng-change="isNumericInput(p.SubPackageType,'Weight')" ng-focus="isNumericInput(p.SubPackageType,'Weight')" ng-model="p.SubPackageType.Weight" class="number"/>
+                                                                     <span  ng-hide="disableWeightField(p)">ק''ג</span>
+                                                              </td>
+                                                              <td style="text-align: right">
+                                                                      
+                                                                      <input style="width:80%" type="number" ng-change="isNumericInput(p.SubPackageType,'Length')" ng-focus="isNumericInput(p.SubPackageType,'Length')" ng-model="p.SubPackageType.Length" class="number"/>
+                                                                      <span>סמ'</span>
+                                                              </td>
+                                                              <td style="text-align: right">
+                                                                      <input style="width:80%" type="number" ng-change="isNumericInput(p.SubPackageType,'Width')" ng-focus="isNumericInput(p.SubPackageType,'Width')" ng-model="p.SubPackageType.Width" class="number"/>
+                                                                      <span>סמ'</span>
+                                                               
+                                                              </td>
+                                                              <td style="text-align: right">
+                                                                       <input style="width:80%" type="number" ng-change="isNumericInput(p.SubPackageType,'Height')" ng-focus="isNumericInput(p.SubPackageType,'Height')"  ng-model="p.SubPackageType.Height" class="number"/>
+                                                                       <span>סמ'</span>
+                                                              </td>
+                                                        </tr>
+                                                 </table>
+                                          </div>
+                                          <div style="width:100%" id="{{p.PlatformDivId}}">
+                                                  <table class="stage-1" align="center" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                             <td class="ask-for-sending-form-icon"> <div style="width:61px;height:35px">&nbsp;</div></td>
+                                                             <td value="bottom">
+                                                                      <table>
+                                                                             <tr>
+                                                                                    <td  valign="top">
+                                                                                           <span class="caption">נדרש קירור</span> 
+                                                                                    </td>
+                                                                                    <td valign="middle">
+                                                                                           <div style="height:20px;">
+                                                                                                  <input class="package-details-check-box" type="checkbox" ng-model="p.SubPackageType.FreezeNeeded"/>
+                                                                                           </div>
+                                                                                    </td>
+                                                                             </tr>
+                                                                      
+                                                                    </table>
+                                                             </td>
+                                                             <td>
+                                                                      <table>
+                                                                             <tr>
+                                                                                    <td  valign="top">
+                                                                                            <span class="caption">שברירי</span>
+                                                                                    </td>
+                                                                                    <td valign="middle">
+                                                                                           <div style="height:20px;">
+                                                                                                  <input class="package-details-check-box" type="checkbox" ng-model="p.SubPackageType.Fragile"/>
+                                                                                           </div>
+                                                                                    </td>
+                                                                             </tr>
+                                                                      
+                                                                    </table>
+                                                               </td>
+                                                             <td>
+                                                                <table>
+                                                                             <tr>
+                                                                                    <td  valign="top">
+                                                                                            <span class="caption">נדרש בידוד</span>
+                                                                                    </td>
+                                                                                    <td valign="middle">
+                                                                                           <div style="height:20px;">
+                                                                                                   <input class="package-details-check-box" type="checkbox" ng-model="p.SubPackageType.IsolationNeeded"/>
+                                                                                           </div>
+                                                                                    </td>
+                                                                             </tr>
+                                                                    </table>
+                                                             </td>
+                                                        </tr>
+                                                 </table>
+                                          </div>
+                                    <div style="width:100%;text-align: center">
+                                          <table class="stage-1" align="center" cellspacing="0" cellpadding="0">
+                                                 <tr>
+                                                     <td  vallign="top" align="right" style="width:73px;">
+                                                                               <img src="images/insurance-icon.png" style="width:73px;height:48px"/>
+                                                      </td>
+                                                      
+                                                      <td style="text-align: right;" valign="middle">
+                                                               <div style="float:right;padding-top:20px;">
+                                                                      <input class="package-details-check-box" type="checkbox" ng-model="p.SubPackageType.InsuranseNeeded"  ng-change="changeInsuranseState(rfs.id,p.Index)"/> 
+                                                                      <span class="caption">ביטוח</span>
+                                                               </div>
+                                                               <div id="{{p.InsuranceDivId}}" style="float:right;padding-top:20px;padding-right:20px">
+                                                                      <input type="number" ng-change="isNumericInput(p.SubPackageType,'InsuranseValue')" ng-focus="isNumericInput(p.SubPackageType,'InsuranseValue')" ng-model="p.SubPackageType.InsuranseValue" ng-change="changeInsuranseValue(rfs.id,p.Index)" placeholder = "ערך מבוטח"/>
+                                                               </div>
+                                                       </td>
+                                                      <td></td>
+                                                 </tr>
+                                          </table>
+                                    </div>
+                                                 
+                                  
+                         
+                                        <!-- <button ng-click="removePackage(rfs.id,p.Index)">הסר משלוח</button> -->
+                                             
+                                             
+                                     </div>
                         
-                                    <select ng-change="p.PackageTypeChange()" ng-options ="pac.Name for pac in p.Packages" ng-model="p.PackageType">
-                                    </select>
-                                    <label>פרטי משלוח</label>
-                                    <select ng-options="pac.Name for pac in p.SubPackages" ng-model="p.SubPackageType"></select>
-                                    <label>משקל</label>
-                                    <input type="number" ng-model="p.SubPackageType.Weight" class="number"/>
-                                    <span>ק''ג</span>
-                                    <label>אורך</label>
-                                    <input type="number" ng-model="p.SubPackageType.Length" class="number"/>
-                                    <label>רוחב</label>
-                                    <input type="number" ng-model="p.SubPackageType.Width" class="number"/>
-                                    <label>גובה</label>
-                                    <input type="number" ng-model="p.SubPackageType.Height" class="number"/> 
-                                     <button ng-click="removePackage(rfs.id,p.Index)">הסר משלוח</button>
-                                         <div style="display:none" id=" {{p.PlatformDivId}}">
-                                             <label>נדרש קירור</label> <input type="checkbox" ng-model="p.SubPackageType.FreezeNeeded"/>
-                                             <label>שברירי</label> <input type="checkbox" ng-model="p.SubPackageType.Fragile"/>
-                                             <label>נדרש בידוד</label> <input type="checkbox" ng-model="p.SubPackageType.IsolationNeeded"/>
-                                             <label>נדרש ביטוח</label> <input type="checkbox"ng-model="p.SubPackageType.InsuranseNeeded" />
-                                        </div>
-                                 </div>  
-                    
-                            </fieldset>
-              
+                                </fieldset>
+                     </div>
                  </div>
-                <div>
-                    <fieldset>
-                        <legend>כתובת וזמן איסוף</legend>
-                        <label>עיר</label>
-                        <select>
-                            <option>
-                                תל-אביב
-                            </option>
-                            <option>
-                                באר שבע
-                            </option>
-                            <option>
-                                חיפה
-                            </option>
-                            <option>
-                                אילת
-                            </option>
-
-                        </select>
-                        <label>רחוב </label>
-                        <input type="text" />
-
-                        <label>מספר בית</label>
-                        <input type="text" class="number" />
-
-                        <label>קומה</label>
-                         <input type="text" class="number"/>
-
-                        <label>מספר דירה/מספר משרד</label>
-                        <input type="text" class="number"/>
-
-                        <label>תאריך  איסוף</label>
-                        <input type="date"  ng-model="pickUpDate" />
-
-                        <label>זמן איסוף</label>
-                        <input type="time" />
-                        <br />
-                        <label>הערות</label>
-                        <textarea></textarea>
-                    </fieldset>
-                    <fieldset>
-                        <legend>
-                            כתובת וזמן מסירה
-                        </legend>
-                        <label>עיר</label>
-                        <select>
-                            <option>
-                                תל-אביב
-                            </option>
-                            <option>
-                                באר שבע
-                            </option>
-                            <option>
-                                חיפה
-                            </option>
-                            <option>
-                                אילת
-                            </option>
-
-                        </select>
-                       <label>רחוב </label>
-                        <input type="text" />
-
-                        <label>מספר בית</label>
-                        <input type="text" class="number" />
-
-                        <label>קומה</label>
-                         <input type="text" class="number"/>
-
-                        <label>מספר דירה/מספר משרד</label>
-                        <input type="text" class="number"/>
-
-            
-                        <label>תאריך מסירה</label>
-                        <input type="date" />
-
-                        <label>זמן מסירה</label>
-                        <input type="time" />
-                        <br />
-                        <label>הערות</label>
-                        <textarea></textarea>
-                    </fieldset>
-                    <div style="margin-top:5px">
-                            <button class="btn btn-primary" ng-click="sendRequest(rfs.id)">בקש הצעת מחיר</button>
-                    </div>
+                <div data-stage="2" class="row" style="text-align: center;display: none">
+                     <shipping-top-indicator stage="2"></shipping-top-indicator>
+                     
+                     <table class="stage-1" align="center">
+                            <tr>
+                                   <td colspan="2" align="center"><span class="caption">תאריך איסוף</span></td>
+                                   <td colspan="2" align="center"><span class="caption">תאריך מסירה</span></td>
+                            </tr>
+                            <tr>
+                                   <td colspan="2" align="center"><required-mark></required-mark> <input id = "afsPickupDate_{{rfs.id}}" class="pointer" type="text" readonly="yes" ng-model="rfs.pickupDate" /></td>
+                                   <td colspan="2" align="center"><required-mark></required-mark>  <input id = "afsDeliveryDate_{{rfs.id}}" type="text" class="pointer" readonly="yes" ng-model="rfs.deliveryDate"/></td>
+                                   
+                            </tr>
+                            <tr>
+                                   <td colspan="2" align="center"><span class="caption">זמן איסוף</span></td>
+                                   <td colspan="2" align="center"><span class="caption">זמן מסירה</span></td>
+                            </tr>
+                            <tr>
+                                   <td align="left">
+                                       <required-mark></required-mark>
+                                          <span class="caption">מ-</span>
+                                          <input class="time pointer" id ="afsPickupStartTime_{{rfs.id}}"  type="text" ng-model="rfs.pickupStartTime" />
+                                   </td>
+                                   <td align="right">
+                                      
+                                          <span class="caption">עד-</span>
+                                          <input class="time pointer" type="text pointer"  id ="afsPickupEndTime_{{rfs.id}}" ng-model="rfs.pickupEndTime" />
+                                   </td>
+                                   <td align="left">
+                                       <required-mark></required-mark>
+                                           <span class="caption">מ-</span>
+                                           <input class="time pointer" type="text"  id ="afsDeliveryStartTime_{{rfs.id}}" ng-model="rfs.deliveryStartTime" />
+                                   </td>
+                                   <td align="right">
+                                           <span class="caption">עד-</span>
+                                          <input class="time pointer" type="text"  id ="afsDeliveryEndTime_{{rfs.id}}" ng-model="rfs.deliveryEndTime" />
+                                   </td>
+                                  
+                       
+                            </tr>
+                     </table>
+                     <div class="separator-stage-2 centered"></div>
+                     
+                     <table class="stage-1" align="center">
+                            <tr>
+                                   <td colspan="3">
+                                          <span class="caption">כתובת איסוף</span>
+                                   </td>
+                                   <td colspan="3">
+                                          <span class="caption">כתובת מסירה</span>                                          
+                                   </td>
+                            </tr>
+                            <tr>
+                                   <td colspan="3">
+                                       <required-mark></required-mark>
+                                       <div style="width:95%;float:left">
+                                           <select class="form-control" ng-options="city.name for city in Cities" ng-model="rfs.pickupCity" ng-change="updatePickupStreetsList(rfs)"></select>
+                                       </div>
+                                   </td>
+                                   <td colspan="3">
+                                       <required-mark></required-mark>
+                                       <div style="width:95%;float:left">
+                                           <select class="form-control" id="deliveryCities{{rfs.Id}}" ng-options="city.name for city in Cities" ng-model="rfs.deliveryCity" ng-change="updateDeliveryStreetsList(rfs)"></select>
+                                           </div>
+                                    </td>
+                            </tr>
+                            <tr>
+                                   <td colspan="3">
+                                       <required-mark></required-mark>
+                                       <div style="width:95%;float:left">
+                                           <select class="form-control" ng-options="street.Name for street in rfs.pickUpStreets" ng-model="rfs.PickupStreet"></select>
+                                         </div>
+                                   </td>
+                                   <td colspan="3">
+                                       <required-mark></required-mark>
+                                       <div style="width:95%;float:left">
+                                           <select class="form-control" ng-options="street.Name for street in rfs.deliveryStreets" ng-model="rfs.DeliveryStreet"></select>
+                                       </div>
+                                    </td>
+                                   
+                            </tr>
+                             <tr>
+                                   <td>
+                                       <required-mark></required-mark>
+                                       <div style="width:85%;float:left">
+                                           <input type="text" class="form-control" ng-change="isIntegerInput(rfs,'pickupHouse')" ng-model="rfs.pickupHouse" placeholder="מספר בית" title="מספר בית" />
+                                        </div>
+                                    </td>
+                                   <td>
+                                        <input type="text" class="form-control" ng-model="rfs.pickupFloor"  placeholder="קומה"  title="קומה"/>  
+                                   </td>
+                                   <td>
+                                          <input type="text" class="form-control" ng-model="rfs.pickupAppartment"  placeholder="מספר דירה/מספר משרד" title="מספר דירה/מספר משרד"/>
+                                   </td>
+                                   <td>
+                                       <required-mark></required-mark>
+                                       <div style="width:85%;float:left">
+                                           <input type="text" class="form-control" ng-model="rfs.deliveryHouse" ng-change="isIntegerInput(rfs,'deliveryHouse')" placeholder="מספר בית" title="מספר בית" />
+                                       </div>
+                                   </td>
+                                   <td>
+                                       
+                                           <input type="text" class="form-control" ng-model="rfs.deliveryFloor" placeholder="קומה" title="קומה" />
+                                       
+                                   </td>
+                                   <td>
+                                        <input type="text" class="form-control" ng-model="rfs.deliveryAppartment"  placeholder="מספר דירה/מספר משרד" title="מספר דירה/מספר משרד"/>
+                                   </td>
+                            </tr>
+                            <tr>
+                                   <td colspan="3">
+                                       <required-mark></required-mark>
+                                       <div style="width:95%;float:left">
+                                           <input placeholder="איש קשר" title="איש קשר" ng-model="rfs.pickupContactPerson" class="form-control" />
+                                       </div>
+                                   </td>
+                                   <td colspan="3">
+                                       <required-mark></required-mark>
+                                       <div style="width:95%;float:left">
+                                           <input placeholder="איש קשר" title="איש קשר" ng-model="rfs.deliveryContactPerson" class="form-control" />
+                                       </div>
+                                    </td>
+                            </tr>
+                            <tr>
+                                   <td colspan="3">
+                                       <required-mark></required-mark>
+                                       <div style="width:95%;float:left">
+                                           <input placeholder="מס' טלפון" title="מס' טלפון" ng-change="isPhoneInput(rfs,'pickupPhone')" ng-model="rfs.pickupPhone" class="form-control" />
+                                       </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <required-mark></required-mark>
+                                        <div style="width:95%;float:left">
+                                            <input placeholder="מס' טלפון" title="מס' טלפון" ng-change="isPhoneInput(rfs,'deliveryPhone')" ng-model="rfs.deliveryPhone" class="form-control" />
+                                        </div>
+                                    </td>
+                            </tr>
+                             <tr>
+                                   <td colspan="3">
+                                          <input placeholder = "דואר אלקטרוני" title = "דואר אלקטרוני" ng-model = "rfs.pickupEmail" class="form-control"/>
+                                   </td>
+                                    <td colspan="3">
+                                          <input placeholder = "דואר אלקטרוני" title = "דואר אלקטרוני" ng-model = "rfs.deliveryEmail" class="form-control"/>
+                                   </td>
+                            </tr>
+                           
+                            <tr>
+                                   <td colspan="3">
+                                          <input placeholder="חברה" title="חברה" ng-model="rfs.pickupCompany" class = "form-control"/>
+                                   </td>
+                                   <td colspan="3">
+                                          <input placeholder="חברה"  title="חברה" ng-model="rfs.deliveryCompany" class = "form-control"/>
+                                   </td>
+                            </tr>
+                            
+                            <tr>
+                                   <td colspan="3">
+                                          <textarea class="form-control" ng-model="rfs.pickupRemark" placeholder="הערות" title="הערות"></textarea>
+                                   </td>
+                                   <td colspan="3">
+                                          <textarea class="form-control" ng-model="rfs.deliveryRemark" placeholder="הערות" title="הערות"></textarea>
+                                   </td>
+                            </tr>
+                     </table>
                 </div>
-            </div>
+                
+                <div data-stage="3" class="row" style="display: none;text-align: center">
+                     <shipping-top-indicator stage="3"></shipping-top-indicator>
+                      <div class="row"  id="divPrices{{rfs.id}}" style="display: none;margin-bottom:10px;">
+                            <div style="width:100%;text-align: center"  >
+                                  <span class="caption">הצעות שליחים</span>
+                               <table class="table table-bordered" align ="center" style="text-align:center">
+                                      <tr>
+                                             <th class="mini-caption" style="text-align:center">מספר סדורי</th>
+                                             <th class="mini-caption" style="text-align:center">שליח</th>
+                                             <th class="mini-caption" style="text-align:center">מחיר</th>
+                                             <th class="mini-caption" style="text-align:center">הערות</th>
+                                             <th  class="mini-caption" style="text-align:center">בקשה</th>
+                                             <th class="mini-caption" style="text-align:center"></th>
+                                      </tr>
+                                      <tr ng-repeat="price in rfs.Prices">
+                                             <td class="gray-mini-caption" style="text-align:center">{{price.Id}}</td>
+                                             <td class="gray-mini-caption" style="text-align:center">{{price.UserName}}</td>
+                                             <td class="gray-mini-caption" style="text-align:center">{{price.Price}}</td>
+                                             <td class="gray-mini-caption" style="text-align:center">{{price.Remark}}</td>
+                                             <td class="gray-mini-caption" style="text-align:center">{{price.SessionId}}</td>
+                                             <td class="gray-mini-caption" style="text-align:center"><button id="btnAcceptPtice{{price.Id}}" class="button" ng-click="sendAccept(rfs.id,price.Id)">קבל הצעה</button></td>
+                                      </tr>
+                               </table>
+                           </div>
+                    </div>
+                     <div class="stage-1 centered" style="padding-top:10px;padding-right:0px;" >
+                            <div class="request-summary" style="width:100%;padding:10px;">
+                                   <table>
+                                          <tr>
+                                                 <td class="done-package-icon summary-margin"></td>
+                                                 <td>
+                                                         <div style="padding-right:10px;float: right;background-color:white;">
+                                          
+                                                               <div ng-repeat="p in rfs.packageDefinitions" style="text-align: right;">
+                                                                              <span class="caption">{{p.PackageType.Name}}&nbsp;{{p.SubPackageType.Weight}}&nbsp;ק''ג</span>
+                                                                              <br/>
+                                                                              <span>משקל </span>
+                                                                              <span class="mini-caption">{{p.SubPackageType.Weight}}&nbsp;ק''ג</span>
+                                                                              <span>אורך </span>
+                                                                              <span class="mini-caption">{{p.SubPackageType.Length}}&nbsp;ס''מ</span>
+                                                                               <span>רוחב </span>
+                                                                              <span class="mini-caption">{{p.SubPackageType.Width}}&nbsp;ס''מ</span>
+                                                                               <span>גובה </span>
+                                                                              <span class="mini-caption">{{p.SubPackageType.Height}}&nbsp;ס''מ</span>
+                                                                               <span>כמות</span>
+                                                                               <span class="mini-caption">{{p.Amount}} יח'</span>
+                                                                              <span>ערך מבוטח</span>
+                                                                              <span class="mini-caption">{{p.SubPackageType.InsuranseValue}} &#8362;</span>
+                                                               </div>
+                                                               <div style="clear: both"></div>
+                                                         </div>
+                                                 </td>
+                                          </tr>
+                                   </table>
+                            </div>
+                     </div>
+                     <div class="stage-1 centered request-summary" style="margin-top:30px;padding-right:10px;">
+                            <table>
+                                   <tr>
+                                          <td class="done-location-icon summary-margin"></td>
+                                          <td align="right">
+                                              <div class="caption">
+                                                מ-
+                                                 <span ng-show="showSection(rfs.PickupStreet.Id)">
+                                                        {{rfs.PickupStreet.Name}}
+                                                 </span>
+                                                  <span ng-show="showSection(rfs.pickupHouse)">
+                                                 בית
+                                                 {{rfs.pickupHouse}}
+                                                  </span>
+                                                   <span ng-show="showSection(rfs.pickupFloor)">
+                                                 קומה
+                                                 {{rfs.pickupFloor}}
+                                                   </span>
+                                                    <span ng-show="showSection(rfs.pickupAppartment)">
+                                                 דירה
+                                                 {{rfs.pickupAppartment}}
+                                                    </span>
+                                                     <span ng-show="showSection(rfs.pickupCity.Id)">
+                                                 {{rfs.pickupCity.name}}.
+                                                     </span>
+                                              </div>
+                                                <div class="caption">
+                                                 <span data-ng-show="showSection(rfs.pickupContactPerson)">
+                                                        איש קשר
+                                                        {{rfs.pickupContactPerson}}
+                                                 </span>
+                                                 <span data-ng-show="showSection(rfs.pickupCompany)">
+                                                        חברה
+                                                        {{rfs.pickupCompany}}
+                                                 </span>
+                                              </div>
+                                              <div class="mini-caption">
+                                                 {{rfs.pickupDate}}
+                                                 מ-
+                                                 {{rfs.pickupStartTime}}
+                                                 עד-
+                                                 {{rfs.pickupEndTime}}
+                                              </div>
+                                          </td>
+                                   </tr>
+                                   <tr>
+                                          <td></td>
+                                          <td align="right">
+                                              <div class="caption" style="padding-top:10px">
+                                                ל-
+                                                  <span ng-show="showSection(rfs.DeliveryStreet.Id)">
+                                                 {{rfs.DeliveryStreet.Name}}
+                                                  </span>
+                                                   <span ng-show="showSection(rfs.deliveryHouse)">
+                                                 בית
+                                                 {{rfs.deliveryHouse}}
+                                                   </span>
+                                                    <span ng-show="showSection(rfs.deliveryFloor)">
+                                                 קומה
+                                                 {{rfs.deliveryFloor}}
+                                                    </span>
+                                                     <span ng-show="showSection(rfs.deliveryAppartment)">
+                                                 דירה
+                                                 {{rfs.deliveryAppartment}}
+                                                     </span>
+                                                     <span ng-show="showSection(rfs.deliveryCity.Id)">
+                                                 {{rfs.deliveryCity.name}}.
+                                                     </span>
+                                              </div>
+                                              <div class="caption">
+                                                 <span data-ng-show="showSection(rfs.deliveryContactPerson)">
+                                                        איש קשר
+                                                        {{rfs.deliveryContactPerson}}
+                                                 </span>
+                                                 <span data-ng-show="showSection(rfs.deliveryCompany)">
+                                                        חברה
+                                                        {{rfs.deliveryCompany}}
+                                                 </span>
+                                              </div>
+                                              <div class="mini-caption">
+                                                 {{rfs.deliveryDate}}
+                                                 מ-
+                                                 {{rfs.deliveryStartTime}}
+                                                 עד-
+                                                 {{rfs.deliveryEndTime}}
+                                              </div>
+                                          </td>
+                                   </tr>
+                                   
+                            </table>
+                     </div>
+                     <div style="margin-top:20px">
+                            <button id="btnSendRequest{{rfs.id}}" class="button button-large" style="width: 300px;" ng-click="sendRequest(rfs.id)">בקש הצעת מחיר</button>
+                     </div>
+                </div>
+            <div data-stage="1" style="width:100%;text-align:center;margin-top:30px;">
+                
+                <table class="stage-1" align="center" ng-if="rfs.constraints.sender.length>0 && rfs.constraints.receiver.length>0">
+                    <tr>
+                        <td>
+                            <span class="caption">קיים אצל השולח</span>
+                        </td>
+                        <td>
+                            <span class="caption">קיים אצל המקבל</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <constraint ng-repeat="c in rfs.constraints.sender" data-constraint="c"></constraint>
+                        </td>
+                        <td>
+                            <constraint ng-repeat="c in rfs.constraints.receiver" data-constraint="c"></constraint>
+                        </td>
+                    </tr>
+                </table>
+                <table align="center" ng-if="rfs.constraints.courier.length>0 && rfs.constraints.courier.length>0">
+                    <tr>
+                        <td>
+                            <span class="caption">נדרש ממשאית</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <constraint ng-repeat="c in rfs.constraints.courier" data-constraint="c"></constraint>
+
+                        </td>
+                    </tr>
+                </table>
+</div>
+                  <div data-stage="1" class="plus-package-background" border="1" style="width:100%;text-align:center;margin-top:30px;">
+                     
+                                          <table class="stage-1" align="center">
+                                                 <tr>
+                                                        <td align="right">
+                                                                <div  style="padding-right:25px;">
+                                                                      
+                                                                       <img src="images/package-plus.png" ng-click="rfs.addPackage()" class="tab-content" style="float:right;padding-left:10px;cursor: pointer"/>
+                                                                       <span class="caption tab-content">להוסיף חבילה</span>
+                                                               </div>
+                                                        </td>
+                                                 </tr>
+                                          </table>                                                        
+              </div>
+              <div data-stage="4" class="row">
+                         <div class="col-sm-1 btn-next" ng-show="rfs.currentStage<3" ng-click="next(rfs.id)"></div>
+                         <div class="col-sm-offset-10 col-sm-1 btn-prev" ng-show="rfs.currentStage>1" ng-click="prev(rfs.id)"></div> 
+                     
+              </div>
+             
+       </div>
+       
         </div>
+
+      
 </div>

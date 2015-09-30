@@ -1,0 +1,31 @@
+﻿<div class="center" style="width:100%;" ng-controller="subscriptionController">
+    <section class="centered center" style="width:300px">
+        <h3 class="caption">הרשמה למרוץ שליחים</h3>
+        <div class="centered subscription-details">
+                <required-mark></required-mark>
+                <input class="large-form-control subscription-form-control" type="text" placeholder="כתובת דואר אלקטרונית" ng-blur="checkEmail()" ng-model="email" />
+        </div>  
+        <div class="centered subscription-details">
+            <required-mark></required-mark>
+            <input class="large-form-control subscription-form-control" type="text" placeholder="שם פרטי" ng-model="firstName" />
+        </div>
+        <div class="centered subscription-details">
+            <required-mark></required-mark>
+            <input class="large-form-control subscription-form-control" type="text" placeholder="שם משפחה" ng-model="lastName"/>
+        </div>
+      
+        <div class="centered subscription-details">
+            <required-mark></required-mark>
+            <input class="large-form-control subscription-form-control" type="password" placeholder="סיסמה" ng-model="password" />
+        </div>
+        <div class="centered subscription-details">
+            <required-mark></required-mark>
+            <input class="large-form-control subscription-form-control" type="password" placeholder="אמת סיסמה" ng-model="repeatedPassword" />
+        </div>
+        <div class="centered subscription-details">
+            <button class="button button-large subscription-form-control" ng-click="saveUser()">הרשם</button>
+
+        </div>
+
+    </section>
+</div>

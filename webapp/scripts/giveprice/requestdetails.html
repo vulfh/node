@@ -1,0 +1,204 @@
+<div>
+    <div class="stage-1 centered" style="padding-top:10px;padding-right:0px;">
+        <div class="request-summary" style="width:100%;padding:10px;">
+            <table style="width:100%">
+                <tr>
+                    <td class="done-package-icon summary-margin"></td>
+                    <td>
+                        <div style="padding-right:10px;float: right;background-color:white;">
+
+                            <div ng-repeat="p in s.Packages" style="text-align: right;">
+                                <span class="caption">{{p.Name}}&nbsp;{{p.Weight}}&nbsp;ק''ג</span>
+                                <br />
+                                <span>משקל </span>
+                                <span class="mini-caption">{{p.Weight}}&nbsp;ק''ג</span>
+                                <span>אורך </span>
+                                <span class="mini-caption">{{p.Length}}&nbsp;ס''מ</span>
+                                <span>רוחב </span>
+                                <span class="mini-caption">{{p.Width}}&nbsp;ס''מ</span>
+                                <span>גובה </span>
+                                <span class="mini-caption">{{p.Height}}&nbsp;ס''מ</span>
+                                <span>כמות </span>
+                                <span class="mini-caption">{{p.Amount}}&nbsp;יח'</span>
+                                <br />
+                                <span class="mini-caption">ערך מבוטח</span>
+                                <span class="gray-mini-caption">{{p.InsuranseValue}}</span>
+                                <span class="mini-caption" ng-show="p.Fragile">שברירי </span>
+                                <span class="mini-caption" ng-show="p.IsolationNeeded">דורש בידוד </span>
+                                <span class="mini-caption" ng-show="p.FreezeNeeded">דורש קירור</span>
+
+
+                                <!--          <extra-details title="שברירי" selected="p.Fragile"></extra-details>
+                                   <extra-details title="דורש בידוד" selected="p.IsolationNeeded"></extra-details>
+                                   <extra-details title="דורש קירור" selected="p.FreezeNeeded"></extra-details>-->
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+               
+                <tr data-ng-if="s.Constraints.sender.length>0">
+                    <td></td>
+                    <td style="text-align:right;">
+                        <div style="text-align:right;">
+                            <div class="caption">קיים אצל השולח</div>
+                            <div style="display:inline-block;">
+                                <ul class="constraint">
+                                    <li class="constraint" ng-repeat="c in s.Constraints.sender">
+                                        <span class="mini-caption">{{c.name }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr data-ng-if="s.Constraints.receiver.length>0">
+                    <td></td>
+                    <td>
+                        <div style="text-align:right;">
+                            <div class="caption">קיים אצל המקבל המשלוח</div>
+                            <div style="display:inline-block;">
+                                <ul class="constraint">
+                                    <li class="constraint" ng-repeat="c in s.Constraints.receiver">
+                                        <span class="mini-caption">{{c.name }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr data-ng-if="s.Constraints.courier.length>0">
+                    <td></td>
+                    <td align="right">
+                        <div style="text-align:right;">
+                            <div class="caption">נדרש ממשאית</div>
+                            <div style="display:inline-block;">
+                                <ul class="constraint">
+                                    <li class="constraint" ng-repeat="c in s.Constraints.courier">
+                                        <span class="mini-caption">{{c.name }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="stage-1 centered request-summary" style="padding-top:30px;padding-right:10px;">
+            <table>
+                <tr>
+                    <td class="done-location-icon summary-margin"></td>
+                    <td align="right">
+                        <div class="caption">
+                            מ-
+                            <span>
+                                {{s.PickupAddress.StreetName}}
+                            </span>
+                            <span ng-show="showSection(s.PickupAddress.House)">
+                                בית
+                                {{s.PickupAddress.House}}
+                            </span>
+                            <span ng-show="showSection(s.PickupAddress.Floor)">
+                                קומה
+                                {{s.PickupAddress.Floor}}
+                            </span>
+                            <span ng-show="showSection(s.PickupAddres.Appartment)">
+                                דירה
+                                {{s.PickupAddress.Appartment}}
+                            </span>
+                            <span ng-show="showSection(s.PickupAddress.City)">
+                                {{s.PickupAddress.City}}
+                            </span>
+                        </div>
+                        <div class="caption">
+                            <span data-ng-show="showSection(s.PickupContactPerson)">
+                                איש קשר
+                                {{s.PickupContactPerson}}
+                            </span>
+                            <div>
+                                <span data-ng-show="showSection(s.PickupPhone)">
+                                    מס' טלפון
+                                    {{s.PickupPhone}}
+                                </span><br>
+                                <span data-ng-show="showSection(s.PickupEmail)">
+                                    דואר אלקטרוני
+                                    {{s.PickupEmail}}
+                                </span>
+                            </div>
+                            <span data-ng-show="showSection(s.PickupCompany)">
+                                חברה
+                                {{s.PickupCompany}}
+                            </span>
+                        </div>
+                        <div class="mini-caption">
+                            {{formatDate(s.PickupDate)}}
+                            מ-
+                            {{s.PickupStartTime}}
+                            עד-
+                            {{s.PickupEndTime}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="right">
+                        <div class="caption" style="padding-top:10px">
+                            ל-
+                            <span>
+                                {{s.DeliveryAddress.StreetName}}
+                            </span>
+                            <span ng-show="showSection(s.DeliveryAddress.House)">
+                                בית
+                                {{s.DeliveryAddress.House}}
+                            </span>
+                            <span ng-show="showSection(s.DeliveryAddress.Floor)">
+                                קומה
+                                {{s.DeliveryAddress.Floor}}
+                            </span>
+                            <span ng-show="showSection(s.DeliveryAddress.Appartment)">
+                                דירה
+                                {{s.DeliveryAddress.Appartment}}
+                            </span>
+                            <span ng-show="showSection(s.DeliveryAddress.City)">
+                                {{s.DeliveryAddress.City}}
+                            </span>
+                        </div>
+                        <div class="caption">
+                            <span data-ng-show="showSection(s.DeliveryContactPerson)">
+                                איש קשר
+                                {{s.DeliveryContactPerson}}
+                            </span>
+                            <div>
+                                <span data-ng-show="showSection(s.DeliveryPhone)">
+                                    מס' טלפון
+                                    {{s.DeliveryPhone}}
+                                </span><br>
+                                <span data-ng-show="showSection(s.DeliveryEmail)">
+                                    דואר אלקטרוני
+                                    {{s.DeliveryEmail}}
+                                </span>
+                            </div>
+                            <span data-ng-show="showSection(s.DeliveryCompany)">
+                                חברה
+                                {{s.DeliveryCompany}}
+                            </span>
+                        </div>
+                        <div class="mini-caption">
+                            {{formatDate(s.DeliveryDate)}}
+                            מ-
+                            {{s.DeliveryStartTime}}
+                            עד-
+                            {{s.DeliveryEndTime}}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+</div>
