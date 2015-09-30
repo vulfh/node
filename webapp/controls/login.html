@@ -1,16 +1,21 @@
-<div ng-controller="loginController">
-<fieldset>
-    <legend>כניסה למערכת</legend>
-    <ul style="list-style-type: none" id="listLogin">
-        <li>
-            <label for="txtUserName">שם משתמש</label>
-            <input type="text" id="txtUserName" name="userName" placeholder="שם משתמש"/>
-        </li>
-        <li>
-            <label for="txtPassword">סיסמה</label>    
-            <input type="password" id="txtPassword" name="password" placeholder="סיסמה"/>
-        </li>
-        <li><input type="button" value="כנס" class="btn btn-primary" ng-click="login()"/></li>
-    </ul>
-</fieldset>
+
+<div ng-controller="loginController" >
+    
+       
+            
+                <div>
+                            <label for="txtUserName" style="color:white;">דואר אלקטרוני</label>
+                    <input type="text" style="width:125px;" id="txtUserName" name="userName" placeholder="דואר אלקטרוני" />
+                        
+                           <label for="txtPassword" style="color:white;">סיסמה</label>
+                           <input type="password" style="width:80px;" id="txtPassword" name="password"  placeholder="סיסמה"/>
+                           
+                            <input type="button" value="כנס" class=" button"  ng-click="login()"/>
+               </div>         
+           
+            <div  style="text-align: right;direction: rtl">
+                    <span style="color:white;cursor: pointer">שכחתי סיסמה או שם משתמש</span>
+            </div>
 </div>
+
+   

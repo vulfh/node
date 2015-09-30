@@ -1,0 +1,112 @@
+<div class="modal fade" id="dealTicket" role="dialog" ng-controller="ticketController">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="text-align: center">
+                        <div class="modal-header ticket-header">
+                                <div class="ticket-x" ng-click="close()"></div>
+                                עסקה מס' {{dealId}}</div>
+                        <div class="modal-body tab-content">
+                                <div style="padding-right:30px;width:50%;float:right;text-align: right;">
+                                                <div class="gray-caption">
+                                                     כתובת איסוף           
+                                                </div>
+                                                <div class="caption">
+                                                        {{pickupAddress}}         
+                                                </div>
+                                                <div class="gray-caption">
+                                                              תאריך איסוף
+                                                </div>
+                                                <div class="caption">
+                                                            {{pickupDate}}    
+                                                </div>
+                                                <div class="gray-caption">זמן איסוף</div>
+                                                <div class="caption">{{pickupTime}}</div>
+                                                <div class="gray-caption">פרטי התקשרות</div>
+                                                <div class="caption">{{pickupContactPerson}}</div>
+                                                <div class="caption">טל:{{pickupPhone}}</div>
+                                                <div class="caption">דואר אלקטרוני:{{pickupEmail}}</div>
+                                                <div class="gray-header" ng-if="constraints.sender.length >0">קיים אצל השולח</div>
+                                                <div class="ticket-constraints">
+                                                    <extra-details ng-repeat="con in constraints.sender" title="con.name" selected="true"></extra-details>
+                                                </div>
+                                </div>
+                                <div style="padding-right:30px;width:50%;float:right;text-align: right">
+                                                <div class="gray-caption">כתובת מסירה</div>
+                                                 <div class="caption">
+                                                     {{deliveryAddress}}
+                                                 </div>
+                                                  <div class="gray-caption">תאריך מסירה</div>
+                                                 <div class="caption">
+                                                     {{deliveryDate}}
+                                                 </div>
+                                                 <div class="gray-caption">זמן מסירה</div>
+                                                 <div class="caption">
+                                                                {{deliveryTime}}
+                                                 </div>
+                                                  <div class="gray-caption">פרטי התקשרות</div>
+                                                <div class="caption">{{deliveryContactPerson}}</div>
+                                                <div class="caption">טל:{{deliveryPhone}}</div>
+                                                <div class="caption">דואר אלקטרוני:{{deliveryEmail}}</div>
+                                                <div class="gray-header" ng-if="constraints.receiver.length >0">קיים אצל מקבל משלוח</div>
+                                                <div class="ticket-constraints">
+                                                    <extra-details ng-repeat="con in constraints.receiver" title="con.name" selected="true"></extra-details>
+                                                </div>
+                                               
+                                                 
+                                </div>
+                                <div style="clear:both"></div>
+                           
+                                <div style="width:100%;" ng-hide="providerRemark!==undefined && providerRemark!==null" >
+                                                <br/><br/>
+                                </div>
+                                <div style="width:100%;padding-top:20px;" ng-show="providerRemark!==undefined && providerRemark!==null">
+                                                <textarea disabled="yes" class="form-control"  placeholder="הערות השליח">{{providerRemark}}</textarea>
+                                </div>
+                                 
+                            
+                               
+                               <div ng-repeat="package in packages" style="width:100%;text-align:right;">
+                                                <div class="caption packages-offset">{{package.Type.name}}</div>
+                                                <div class="ticket-row-space" style="display:table; width:100%;text-align:center;">
+                                                       <div class="table-row" style="text-align:center">
+                                                                <div class="table-cell packages-offset" style="width:100%;text-align: center;">
+                                                                         <extra-details title="'שברירי'" selected="package.Fragile"></extra-details>
+                                                                         <extra-details title="'דורש בידוד'" selected="package.IsolationNeeded"></extra-details>
+                                                                         <extra-details title="'דורש קירור'" selected="package.FreezeNeeded"></extra-details>
+                                                                        
+                                                                        <div class="ticket-constraints">
+                                                                            <div class="gray-header" ng-if="constraints.courier.length>0">נדרש ממשאית</div>
+                                                                            <extra-details ng-repeat="con in constraints.courier" title="con.name" selected="true"></extra-details>
+                                                                        </div>
+                                                               </div>
+                                                           
+
+                                                       </div>
+                                                </div>
+                                                 <div class="packages-offset ticket-row-space" style="display:table">
+                                                                <div class="table-row">
+                                                                           <div class="table-cell gray-caption" style="width:30px">משקל</div>
+                                                                           <div class="table-cell caption ticket-package-details-offset">{{package.Weight}} ק''ג</div>
+                                                                           <div class="table-cell ticket-package-details-padding gray-caption">
+                                                                                אורך
+                                                                           </div>
+                                                                           <div class="table-cell caption ticket-package-details-offset">{{package.Length}} ס''מ</div>
+                                                                            <div class="table-cell ticket-package-details-padding gray-caption">
+                                                                                רוחב
+                                                                           </div>
+                                                                           <div class="table-cell caption ticket-package-details-offset">{{package.Width}} ס''מ</div>
+                                                                           <div class="table-cell ticket-package-details-padding gray-caption">
+                                                                                גובה
+                                                                           </div>
+                                                                           <div class="table-cell caption ticket-package-details-offset">{{package.Height}} ס''מ</div>
+                                                                            <div class="table-cell gray-caption ticket-package-details-padding">כמות</div>
+                                                                            <div class="table-cell caption ticket-package-details-offset">{{package.Amount}} יח'</div>
+                                                                           <div class="table-cell gray-caption ticket-package-details-padding">ערך מבוטח</div>
+                                                                           <div class="table-cell caption ticket-package-details-offset">{{package.InsuranseValue}} &#8362;</div>
+                                                                </div>
+                                                              
+                                               </div>
+                               </div>
+                        </div>
+                    </div>
+                </div>
+        </div>

@@ -1,0 +1,125 @@
+﻿<div class="modal fade" id="interestDetails"  role="dialog" ng-controller="defineInterestController">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="text-align: center;">
+                        <div class="modal-header"><h1>תחום עניין חדש</h1></div>
+                        <div class="modal-body"  >
+						<div class="innerPage" style="text-align:right">
+                                                    <h2>הגדרת תחום התעניינות כספק</h2>
+                                                    <input type="text" required title="please fill" ng-model="interestDefinition.name"/>
+                                                    <fieldset>
+                                                        <legend>מיקום איסוף</legend>
+                                                        
+                                                        <div style="float:right;">
+                                                            <label>איזור</label>
+                                                            <div id="areas" class = "thin-black-frame" style="overflow-y:scroll;overflow-x:hidden;height:100px;width:150px">
+                                                               
+                                                                <div ng-repeat="a in areas" style="text-align:right" >
+                                                                    
+                                                                    <input type ="checkbox" ng-model="a.selected" ng-click="areaStateChanged(a)"/>
+                                                                    <span>{{a.name}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="float:right;">
+                                                            <label>איזורים שנבחרו</label>
+                                                            <div id="selectedAreas" class = "thin-black-frame" style="height:100px;width:450px;overflow-x: auto;overflow-y:auto;margin-right:10px">
+                                                                    <dl>
+                                                                        <dt ng-repeat-start="area in selectedAreas">{{area.name}}</dt>
+                                                                        <dd ng-repeat-end=""><span ng-repeat="city in area.cities">{{city.name}} </span></dd>
+                                                                    </dl>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                    
+                                                     <fieldset>
+                                                                    <legend>פרטי המשלוח</legend>
+                                                                    <section>
+                                                                             <input type="checkbox" ng-model="interestDefinition.freeze"/><label>קיים קירור</label>
+                                                                           <input type="checkbox" ng-model="interestDefinition.fragile"/> <label>יכול להעביר דברים שבריריים</label> 
+                                                                             <input type="checkbox" ng-model="interestDefinition.isolation"/><label>קיים בידוד</label>
+                                                                            
+                                                                    </section>
+                                                                    <section>
+                                                                        <label>ערך מבוטח מירבי</label> <input type="text" value="0" ng-model="interestDefinition.maxInsuranceValue"/>
+                                                                    </section>
+                                                                    <div ng-repeat="p in packageDefinitions" style="width:50%">
+                                                                        
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <th></th>
+                                                                                <th class="header">  <label>סוג המשלוח</label></th>
+                                                                                <th class="header"><label>משקל</label><span>ק''ג</span></th>
+                                                                                <th class="header"><label>אורך</label></th>
+                                                                                <th class="header"><label>רוחב</label></th>
+                                                                                <th class="header"><label>גובה</label></th>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr ng-repeat="pac in interestDefinition.Packages">
+                                                                                    <td><input type="checkbox" ng-model="pac.Selected"/></td>
+                                                                                    <td>
+                                                                                        <span class="highlight">{{pac.Name}}</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="number" ng-model="pac.Weight" class="number"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" ng-model="pac.Length" class="number"/>
+                                                                                    </td>
+                                                                                    <td> <input type="number" ng-model="pac.Width" class="number"/></td>
+                                                                                    <td><input type="number" ng-model="pac.Height" class="number"/> </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                     </div>  
+                                                                </fieldset>
+                                                    <fieldset>
+                                                        <legend>ימי שבוע וזמנים</legend>
+                                                        
+                                                        <div style="width:45%">
+                                                            <div >
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th></th>
+                                                                            <th class="header">יום</th>
+                                                                            <th class="header">משעה</th>
+                                                                            <th class="header">עד שעה</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="day in interestDefinition.Scheduler">
+                                                                            <td>
+                                                                                  <input type="checkbox" ng-model="day.Selected"/>
+                                                                            </td>
+                                                                            <td>
+                                                                              <span class="highlight">{{day.Name}}</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="text" ng-model="day.FromTime"/>
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="text" ng-model="day.TillTime"/>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                    
+                                                                </table>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+
+
+                           
+                             
+                        </div>
+                       
+                        <div class="modal-footer" style="text-align:center">
+                            <button class="btn btn-primary" style="margin:0 auto" ng-click="close()">סגור</button>
+                            <button class="btn btn-success" style="margin:0 auto" ng-click="save()">שמור</button>
+                        </div>
+                    </div>
+                </div>
+        </div>

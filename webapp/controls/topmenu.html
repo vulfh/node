@@ -1,11 +1,17 @@
- <nav class="navbar navbar-default" role="navigation">
-            <div ng-controller="topMenuController" class="collapse navbar-collapse" style="direction:rtl;float:right">
-                שלום,
-                {{userName}}
-                <ul class="nav navbar-nav">
-                    <li ng-repeat="mi in menu.menu" id="topMenuItem{{mi.Id}}" on-repeat-finished-directive="setup()">
-                        <a id="areaOfInterest" href="#" data-toggle="tab" ng-click="switchPage(mi.Id)">{{mi.Caption}}</a>
-                    </li>
-                </ul>
+            <div ng-controller="topMenuController" class="col-sm-12" style="text-align: center;background-color:#355174;padding-top:20px; direction:rtl;">
+                      <div class=" col-sm-12 container" style="">
+                                      <div style="text-align: center">
+                                            <div class="top-menu-container centered" style="">
+                                                       
+                                            <ul class="top-menu" style="text-align: center;">
+                                                <li ng-repeat="mi in menu.menu" id="topMenuItem{{mi.Id}}" on-repeat-finished-directive="setup()">
+                                                    <div class="top-menu-tab top-menu-tab-inactive" id="areaOfInterest"  data-toggle="tab" ng-click="switchPage(mi.Id)">{{mi.Caption}}</div>
+                                                </li>
+                                            </ul>
+                                            </div>
+                                      </div>
+                       </div>
+                       <div class="row">
+                                 <div class="col-sm-12 tab-separator"></div>
+                       </div>
             </div>
-            </nav>
