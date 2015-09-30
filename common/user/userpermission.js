@@ -35,6 +35,7 @@ UserPermission.prototype.CheckPermissionByMask = function (mask) {
             }
         }
     }
+    return false;
 }
 UserPermission.prototype.HasPermission = function (permission) {
     if (this.CurrentPermission !== null && this.CurrentPermission !== undefined) {
