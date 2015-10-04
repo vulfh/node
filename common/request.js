@@ -1,6 +1,6 @@
 var CommonMethods = require('./commonmethods.js');
-var Request = function (queryParams, postBody, cache,cookies) {
-    this.PostParams = postBody;
+var Request = function (queryParams, originalRequest, cache,cookies) {
+    this.PostParams = originalRequest.body;
     this.Query = {};
     this.QueryParams  = queryParams;
     this.Cache = cache;

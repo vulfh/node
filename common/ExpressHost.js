@@ -93,7 +93,7 @@ var ExpressHost = function (port,logger,cache) {
 						// console.log(query);
 						//console.log(pathName);
 						
-						var request = new Request(query, req.body, controller.Cache,req.cookies);
+						var request = new Request(query, req, controller.Cache,req.cookies);
 						var session = new Session(controller.Cache,null,request);
 						session.init(function(){
 								request.Session=session;

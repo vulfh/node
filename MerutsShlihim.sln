@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "node", "http://localhost:51496", "{ADE51DEA-39D4-4C99-B46E-DA824585370F}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51496"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\Dropbox\DEVELOPMENT\Current\ShippingMockup\node\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51496\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51496"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\Dropbox\DEVELOPMENT\Current\ShippingMockup\node\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51496\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\..\..\..\Dropbox\DEVELOPMENT\Current\ShippingMockup\node\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADE51DEA-39D4-4C99-B46E-DA824585370F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADE51DEA-39D4-4C99-B46E-DA824585370F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

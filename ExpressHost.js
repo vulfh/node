@@ -89,7 +89,7 @@ var ExpressHost = function (port,logger,cache) {
 						var pathName = urlParts.pathname.toUpperCase();
 						// console.log(query);
 						//console.log(pathName);
-						var request = new Request(query, req.body, req.session, controller.Cache);
+						var request = new Request(query,req, req.session, controller.Cache);
 						request.release = function (){
 						    }
 						var response = new Response(res);
